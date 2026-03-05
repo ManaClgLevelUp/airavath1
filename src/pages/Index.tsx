@@ -10,6 +10,7 @@ import HowItWorksSection from "@/components/HowItWorksSection";
 import MarketOpportunitySection from "@/components/MarketOpportunitySection";
 import FeaturesSection from "@/components/FeaturesSection";
 import VisionSection from "@/components/VisionSection";
+import TeamSection from "@/components/TeamSection";
 import FooterSection from "@/components/FooterSection";
 
 const Index = () => {
@@ -27,6 +28,7 @@ const Index = () => {
       <MarketOpportunitySection />
       <FeaturesSection />
       <VisionSection />
+      <TeamSection />
       <FooterSection />
     </div>
   );
