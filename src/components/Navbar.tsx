@@ -11,6 +11,8 @@ const navLinks = [
   { label: "Investors", href: "#investors" },
   { label: "Team", href: "#team" },
   { label: "Contact", href: "#contact" },
+  { label: "Newsroom", href: "/newsroom", external: true },
+  { label: "Careers", href: "/careers", external: true },
 ];
 
 const Navbar = () => {
@@ -90,18 +92,30 @@ const Navbar = () => {
             {/* Desktop Menu — center */}
             <div className="hidden lg:flex items-center justify-center flex-1">
               <div className="flex items-center gap-10">
-                {navLinks.map((link) => (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    onClick={(e) => handleNavClick(e, link.href)}
-                    className="group relative font-sub text-base font-medium text-foreground hover:text-primary transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm py-1"
-                  >
-                    {link.label}
-                    {/* Underline animation */}
-                    <span className="absolute bottom-0 left-0 w-full h-[1.5px] bg-primary origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out" />
-                  </a>
-                ))}
+                {navLinks.map((link) =>
+                  (link as any).external ? (
+                    <a
+                      key={link.label}
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group relative font-sub text-base font-medium text-foreground hover:text-primary transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm py-1"
+                    >
+                      {link.label}
+                      <span className="absolute bottom-0 left-0 w-full h-[1.5px] bg-primary origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out" />
+                    </a>
+                  ) : (
+                    <a
+                      key={link.label}
+                      href={link.href}
+                      onClick={(e) => handleNavClick(e, link.href)}
+                      className="group relative font-sub text-base font-medium text-foreground hover:text-primary transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm py-1"
+                    >
+                      {link.label}
+                      <span className="absolute bottom-0 left-0 w-full h-[1.5px] bg-primary origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out" />
+                    </a>
+                  )
+                )}
               </div>
             </div>
 
@@ -161,19 +175,35 @@ const Navbar = () => {
 
                 {/* Nav Links */}
                 <nav className="flex flex-col px-6x pt-4x flex-1" aria-label="Mobile navigation">
-                  {navLinks.map((link, i) => (
-                    <motion.a
-                      key={link.label}
-                      href={link.href}
-                      onClick={(e) => handleNavClick(e, link.href)}
-                      initial={{ opacity: 0, x: 30 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.05 * i + 0.1, duration: 0.3 }}
-                      className="font-sub text-xl font-medium text-foreground hover:text-primary transition-colors py-[14px] border-b border-border/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm"
-                    >
-                      {link.label}
-                    </motion.a>
-                  ))}
+                  {navLinks.map((link, i) =>
+                    (link as any).external ? (
+                      <motion.a
+                        key={link.label}
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={() => setMobileOpen(false)}
+                        initial={{ opacity: 0, x: 30 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.05 * i + 0.1, duration: 0.3 }}
+                        className="font-sub text-xl font-medium text-foreground hover:text-primary transition-colors py-[14px] border-b border-border/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm"
+                      >
+                        {link.label}
+                      </motion.a>
+                    ) : (
+                      <motion.a
+                        key={link.label}
+                        href={link.href}
+                        onClick={(e) => handleNavClick(e, link.href)}
+                        initial={{ opacity: 0, x: 30 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.05 * i + 0.1, duration: 0.3 }}
+                        className="font-sub text-xl font-medium text-foreground hover:text-primary transition-colors py-[14px] border-b border-border/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm"
+                      >
+                        {link.label}
+                      </motion.a>
+                    )
+                  )}
                 </nav>
 
                 {/* CTA at bottom */}

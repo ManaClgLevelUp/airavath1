@@ -1,12 +1,15 @@
 import { NavLink, Outlet, Navigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
-import { LayoutDashboard, Settings, Users, Mail, LogOut } from "lucide-react";
+import { LayoutDashboard, Settings, Users, Mail, LogOut, Newspaper, Briefcase, FileText } from "lucide-react";
 
 const links = [
   { to: "/admin", icon: LayoutDashboard, label: "Dashboard", end: true },
   { to: "/admin/settings", icon: Settings, label: "Website Settings", end: false },
   { to: "/admin/team", icon: Users, label: "Team Members", end: false },
   { to: "/admin/inquiries", icon: Mail, label: "Inquiries", end: false },
+  { to: "/admin/newsroom", icon: Newspaper, label: "Newsroom", end: false },
+  { to: "/admin/careers", icon: Briefcase, label: "Careers", end: false },
+  { to: "/admin/applications", icon: FileText, label: "Applications", end: false },
 ];
 
 const AdminLayout = () => {
