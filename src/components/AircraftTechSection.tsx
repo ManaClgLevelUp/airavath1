@@ -1,8 +1,16 @@
+import { useState, useEffect } from "react";
 import { Zap, PlaneTakeoff, Volume2, Navigation } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import ScrollReveal from "@/components/ScrollReveal";
-import aircraftHero from "@/assets/aircraft-hero-tech.jpg";
+import aircraftSlide1 from "@/assets/aircraft-slide-1.jpg";
+import aircraftSlide2 from "@/assets/aircraft-slide-2.jpg";
+import aircraftSlide3 from "@/assets/aircraft-slide-3.jpg";
 
+const slides = [
+  { src: aircraftSlide1, alt: "eVTOL aircraft flying over cyberpunk city at night" },
+  { src: aircraftSlide2, alt: "eVTOL landing on vertiport at sunset" },
+  { src: aircraftSlide3, alt: "eVTOL formation flying through city corridor" },
+];
 const features = [
   {
     icon: Zap,
@@ -31,6 +39,15 @@ const features = [
 ];
 
 const AircraftTechSection = () => {
+  const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % slides.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <section
       id="technology"
@@ -74,36 +91,48 @@ const AircraftTechSection = () => {
           </p>
         </ScrollReveal>
 
-        {/* Cinematic Aircraft Visual */}
-        <div className="mt-[100px]"><ScrollReveal delay={0.2} className="flex justify-center">
-          <motion.div
-            className="relative max-w-[1200px] w-full"
-            animate={{
-              y: [0, -16, 0],
-              rotate: [0, 0.4, 0, -0.4, 0],
-            }}
-            transition={{
-              duration: 18,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          >
-            {/* Outer glow frame */}
-            <div className="absolute -inset-[1px] rounded-2xl bg-gradient-to-br from-primary/30 via-transparent to-primary/20 blur-sm" />
-            <div className="relative rounded-2xl overflow-hidden border border-primary/10">
-              <img
-                src={aircraftHero}
-                alt="Futuristic eVTOL aircraft in flight over city at night with glowing propulsion"
-                className="w-full h-auto object-cover max-h-[560px]"
-              />
-              {/* Cinematic overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
-              <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5" />
+        {/* Cinematic Animated Image Carousel */}
+        <div className="mt-[100px]">
+          <ScrollReveal delay={0.2} className="flex justify-center">
+            <div className="relative max-w-[1200px] w-full">
+              {/* Outer glow frame */}
+              <div className="absolute -inset-[1px] rounded-2xl bg-gradient-to-br from-primary/30 via-transparent to-primary/20 blur-sm" />
+              <div className="relative rounded-2xl overflow-hidden border border-primary/10 aspect-video">
+                <AnimatePresence mode="wait">
+                  <motion.img
+                    key={current}
+                    src={slides[current].src}
+                    alt={slides[current].alt}
+                    className="absolute inset-0 w-full h-full object-cover"
+                    initial={{ opacity: 0, scale: 1.08 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.97 }}
+                    transition={{ duration: 1.2, ease: "easeInOut" }}
+                  />
+                </AnimatePresence>
+                {/* Cinematic overlays */}
+                <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5" />
+              </div>
+              {/* Slide indicators */}
+              <div className="flex justify-center gap-2 mt-6">
+                {slides.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setCurrent(i)}
+                    className={`h-1.5 rounded-full transition-all duration-500 ${
+                      i === current
+                        ? "w-8 bg-primary"
+                        : "w-3 bg-primary/30 hover:bg-primary/50"
+                    }`}
+                  />
+                ))}
+              </div>
+              {/* Glow beneath */}
+              <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-4/5 h-28 bg-primary/10 blur-3xl rounded-full" />
             </div>
-            {/* Glow beneath aircraft */}
-            <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-4/5 h-28 bg-primary/10 blur-3xl rounded-full" />
-          </motion.div>
-        </ScrollReveal></div>
+          </ScrollReveal>
+        </div>
 
         {/* Technology Feature Row */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4x" style={{ marginTop: "120px" }}>
