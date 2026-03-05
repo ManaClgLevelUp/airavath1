@@ -12,6 +12,13 @@ import DashboardHome from "./pages/admin/DashboardHome";
 import WebsiteSettings from "./pages/admin/WebsiteSettings";
 import TeamManagement from "./pages/admin/TeamManagement";
 import InquiryManagement from "./pages/admin/InquiryManagement";
+import NewsroomManagement from "./pages/admin/NewsroomManagement";
+import CareersManagement from "./pages/admin/CareersManagement";
+import ApplicationsManagement from "./pages/admin/ApplicationsManagement";
+import Newsroom from "./pages/Newsroom";
+import NewsArticle from "./pages/NewsArticle";
+import Careers from "./pages/Careers";
+import JobDetail from "./pages/JobDetail";
 
 const queryClient = new QueryClient();
 
@@ -24,12 +31,19 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/newsroom" element={<Newsroom />} />
+            <Route path="/newsroom/:id" element={<NewsArticle />} />
+            <Route path="/careers" element={<Careers />} />
+            <Route path="/careers/:id" element={<JobDetail />} />
             <Route path="/admin/login" element={<AdminLogin />} />
             <Route path="/admin" element={<AdminLayout />}>
               <Route index element={<DashboardHome />} />
               <Route path="settings" element={<WebsiteSettings />} />
               <Route path="team" element={<TeamManagement />} />
               <Route path="inquiries" element={<InquiryManagement />} />
+              <Route path="newsroom" element={<NewsroomManagement />} />
+              <Route path="careers" element={<CareersManagement />} />
+              <Route path="applications" element={<ApplicationsManagement />} />
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>
