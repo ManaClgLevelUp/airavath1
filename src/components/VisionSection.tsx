@@ -1,119 +1,75 @@
-import { useRef } from "react";
-import { motion, useScroll, useTransform, useInView } from "framer-motion";
-import visionSkyline from "@/assets/vision-skyline.jpg";
-
-/* ── Aircraft formation dots ── */
-const AircraftFormation = () => (
-  <div className="absolute inset-0 pointer-events-none overflow-hidden">
-    {/* V-formation: 5 aircraft dots */}
-    {[
-      { x: 0, y: 0, delay: 0 },
-      { x: -40, y: -30, delay: 0.4 },
-      { x: 40, y: -30, delay: 0.4 },
-      { x: -80, y: -60, delay: 0.8 },
-      { x: 80, y: -60, delay: 0.8 },
-    ].map((a, i) => (
-      <motion.div
-        key={i}
-        className="absolute w-2 h-2 rounded-full bg-primary"
-        style={{
-          top: "45%",
-          left: "50%",
-          marginLeft: a.x,
-          marginTop: a.y,
-          boxShadow: "0 0 12px 4px hsl(189 100% 50% / 0.6)",
-        }}
-        animate={{ x: [0, 300], y: [0, -40] }}
-        transition={{
-          duration: 20,
-          repeat: Infinity,
-          ease: "linear",
-          delay: a.delay,
-        }}
-      />
-    ))}
-  </div>
-);
+import ScrollReveal from "@/components/ScrollReveal";
+import { Button } from "@/components/ui/button";
 
 const VisionSection = () => {
-  const sectionRef = useRef<HTMLElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(contentRef, { once: true, margin: "-100px" });
-
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
-
-  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-
   return (
-    <section
-      ref={sectionRef}
-      id="vision"
-      className="relative overflow-hidden"
-      style={{ paddingTop: 220, paddingBottom: 220 }}
-    >
-      {/* Cinematic background with parallax */}
-      <motion.div className="absolute inset-0 -top-[15%] -bottom-[15%]" style={{ y: bgY }}>
-        <img
-          src={visionSkyline}
-          alt="Futuristic city skyline at night with aircraft"
-          className="w-full h-full object-cover"
-        />
-      </motion.div>
+    <section id="vision" className="relative section-padding">
+      <div className="container-airavath">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12x items-center">
+          <div>
+            <ScrollReveal direction="left">
+              <p className="font-sub text-body-sm text-primary tracking-wide-futuristic uppercase mb-3x">
+                Our Vision
+              </p>
+            </ScrollReveal>
+            <ScrollReveal direction="left" delay={0.1}>
+              <h2 className="font-heading text-section text-foreground mb-4x tracking-futuristic">
+                Cities Without <span className="text-gradient-blue">Limits</span>
+              </h2>
+            </ScrollReveal>
+            <ScrollReveal direction="left" delay={0.2}>
+              <p className="font-body text-body-lg text-muted-foreground mb-4x">
+                We envision a world where urban air mobility is as accessible as ground transportation. 
+                Our integrated ecosystem of eVTOL aircraft and vertiport infrastructure will connect 
+                cities in ways never before possible.
+              </p>
+            </ScrollReveal>
+            <ScrollReveal direction="left" delay={0.3}>
+              <p className="font-body text-body-lg text-muted-foreground mb-6x">
+                By 2030, AIRAVATH aims to operate in 50+ metropolitan areas, reducing urban commute 
+                times by 80% while maintaining zero carbon emissions.
+              </p>
+            </ScrollReveal>
+            <ScrollReveal direction="left" delay={0.4}>
+              <div className="flex gap-3x">
+                <Button variant="hero" size="lg">
+                  Learn More
+                </Button>
+                <Button variant="hero-outline" size="lg">
+                  Watch Film
+                </Button>
+              </div>
+            </ScrollReveal>
+          </div>
 
-      {/* 55% black overlay */}
-      <div className="absolute inset-0 bg-background/55" />
-
-      {/* Horizon glow */}
-      <div
-        className="absolute bottom-0 left-0 right-0 h-[40%]"
-        style={{
-          background:
-            "linear-gradient(to top, hsl(189 100% 50% / 0.15), transparent)",
-        }}
-      />
-
-      {/* Aircraft formation */}
-      <AircraftFormation />
-
-      {/* Content */}
-      <div ref={contentRef} className="relative z-10 container-airavath">
-        <div className="flex flex-col items-center text-center max-w-[760px] mx-auto">
-          {/* Label */}
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
-            className="font-heading text-[28px] font-medium text-primary mb-[24px]"
-            style={{ letterSpacing: "2px" }}
-          >
-            Our Vision
-          </motion.p>
-
-          {/* Statement */}
-          <motion.h2
-            initial={{ opacity: 0, scale: 0.92 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ duration: 1.2, delay: 0.2, ease: "easeOut" }}
-            className="font-heading text-[40px] md:text-[64px] font-semibold text-foreground leading-[1.15] mb-[32px] tracking-futuristic"
-          >
-            A World Where Cities Move Through the Sky
-          </motion.h2>
-
-          {/* Supporting text */}
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            className="font-body text-[18px] leading-[1.6] text-titanium max-w-[620px]"
-          >
-            AIRAVATH envisions a future where urban mobility extends beyond roads
-            and railways. By connecting cities through electric aviation
-            infrastructure, we aim to redefine how people move across the world's
-            most dynamic urban environments.
-          </motion.p>
+          <ScrollReveal direction="right">
+            <div className="relative">
+              <div className="bg-card border border-border rounded-card p-6x">
+                <div className="space-y-6x">
+                  {[
+                    { year: "2025", milestone: "First prototype flight" },
+                    { year: "2027", milestone: "Type certification" },
+                    { year: "2028", milestone: "Commercial operations launch" },
+                    { year: "2030", milestone: "50+ city network" },
+                  ].map((item, i) => (
+                    <div key={i} className="flex items-start gap-4x">
+                      <div className="font-heading text-subheading text-primary min-w-[80px]">
+                        {item.year}
+                      </div>
+                      <div>
+                        <div className="w-2 h-2 rounded-full bg-primary mt-2 mb-1x" />
+                      </div>
+                      <p className="font-sub text-feature text-foreground">
+                        {item.milestone}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              {/* Glow effect */}
+              <div className="absolute -inset-px rounded-card bg-primary/5 -z-10 blur-xl" />
+            </div>
+          </ScrollReveal>
         </div>
       </div>
     </section>

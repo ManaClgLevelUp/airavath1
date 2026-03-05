@@ -17,13 +17,11 @@ const buttonVariants = cva(
         link: "text-primary underline-offset-4 hover:underline",
         hero: "bg-primary text-primary-foreground hover:shadow-[0_0_30px_hsl(189_100%_50%/0.5)] hover:scale-105 tracking-futuristic uppercase",
         "hero-outline": "border border-primary bg-transparent text-foreground hover:bg-primary/10 hover:shadow-[0_0_20px_hsl(189_100%_50%/0.3)] tracking-futuristic uppercase",
-        nav: "bg-primary text-primary-foreground font-sub font-medium text-base hover:shadow-[0_0_20px_hsl(189_100%_50%/0.5)] hover:scale-105 transition-all duration-[250ms] normal-case tracking-normal",
       },
       size: {
         default: "h-10 px-4 py-2 text-sm rounded-lg",
         sm: "h-9 rounded-md px-3 text-sm",
         lg: "h-14 rounded-lg px-9 text-base",
-        nav: "h-[44px] px-7 rounded-[6px] text-base",
         icon: "h-10 w-10 rounded-lg",
       },
     },
