@@ -5,6 +5,7 @@ import FutureUAMSection from "@/components/FutureUAMSection";
 import SolutionSection from "@/components/SolutionSection";
 import AircraftTechSection from "@/components/AircraftTechSection";
 import VertiportSection from "@/components/VertiportSection";
+import HowItWorksSection from "@/components/HowItWorksSection";
 import FeaturesSection from "@/components/FeaturesSection";
 import VisionSection from "@/components/VisionSection";
 import FooterSection from "@/components/FooterSection";
@@ -19,6 +20,7 @@ const Index = () => {
       <SolutionSection />
       <AircraftTechSection />
       <VertiportSection />
+      <HowItWorksSection />
       <FeaturesSection />
       <VisionSection />
       <FooterSection />
