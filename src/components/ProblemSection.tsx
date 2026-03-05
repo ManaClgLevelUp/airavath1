@@ -1,5 +1,6 @@
 import { useRef, useEffect, useState } from "react";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
+import { useIsMobile } from "@/hooks/use-mobile";
 import ScrollReveal from "@/components/ScrollReveal";
 import problemTraffic from "@/assets/problem-traffic.jpg";
 import problemSky from "@/assets/problem-sky.jpg";
@@ -16,14 +17,11 @@ const CountUp = ({ target, duration = 1200 }: CountUpProps) => {
 
   useEffect(() => {
     if (!isInView) return;
-
-    // Extract numeric part and suffix
     const numMatch = target.match(/^([\d.]+)/);
     if (!numMatch) {
       setDisplay(target);
       return;
     }
-
     const numericValue = parseFloat(numMatch[1]);
     const suffix = target.slice(numMatch[1].length);
     const startTime = performance.now();
@@ -31,21 +29,17 @@ const CountUp = ({ target, duration = 1200 }: CountUpProps) => {
     const animate = (currentTime: number) => {
       const elapsed = currentTime - startTime;
       const progress = Math.min(elapsed / duration, 1);
-      // Ease out cubic
       const eased = 1 - Math.pow(1 - progress, 3);
       const current = numericValue * eased;
-
       if (Number.isInteger(numericValue)) {
         setDisplay(Math.round(current) + suffix);
       } else {
         setDisplay(current.toFixed(1) + suffix);
       }
-
       if (progress < 1) {
         requestAnimationFrame(animate);
       }
     };
-
     requestAnimationFrame(animate);
   }, [isInView, target, duration]);
 
@@ -72,12 +66,13 @@ const stats = [
 
 const ProblemSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
+  const isMobile = useIsMobile();
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"],
   });
 
-  const parallaxY = useTransform(scrollYProgress, [0, 1], ["0%", "10%"]);
+  const parallaxY = useTransform(scrollYProgress, [0, 1], isMobile ? ["0%", "0%"] : ["0%", "10%"]);
 
   return (
     <section
@@ -87,14 +82,14 @@ const ProblemSection = () => {
     >
       <div className="container-airavath">
         {/* Heading */}
-        <ScrollReveal className="flex flex-col items-center text-center mb-3x">
+        <ScrollReveal delay={0.12} className="flex flex-col items-center text-center mb-3x">
           <h2 className="font-heading font-semibold text-section text-foreground tracking-futuristic max-w-[720px]">
             Cities Are Running Out of Time
           </h2>
         </ScrollReveal>
 
         {/* Supporting text */}
-        <ScrollReveal delay={0.15} className="flex justify-center mb-12x">
+        <ScrollReveal delay={0.2} className="flex justify-center mb-12x">
           <p className="font-body text-body-lg text-titanium text-center max-w-[640px] leading-[1.6]">
             Urban transportation systems are reaching their limits. Traffic congestion wastes
             billions of hours every year and slows economic productivity across major cities worldwide.
@@ -104,7 +99,7 @@ const ProblemSection = () => {
         {/* Split Visual Comparison */}
         <div className="relative grid grid-cols-1 md:grid-cols-2 gap-0 mb-12x">
           {/* Left — Traffic */}
-          <ScrollReveal direction="left" className="relative">
+          <ScrollReveal direction="left" duration={0.7} className="relative">
             <motion.div
               className="relative h-[320px] md:h-[420px] overflow-hidden rounded-l-card md:rounded-l-card rounded-t-card md:rounded-tr-none"
               style={{ y: parallaxY }}
@@ -114,9 +109,7 @@ const ProblemSection = () => {
                 alt="Heavy traffic congestion in a modern city"
                 className="w-full h-full object-cover"
               />
-              {/* Dark overlay 35% */}
               <div className="absolute inset-0 bg-background/35" />
-              {/* Caption */}
               <div className="absolute bottom-4x left-4x">
                 <span className="font-sub text-body-sm text-foreground tracking-wide-futuristic uppercase">
                   Hours Lost in Traffic
@@ -126,7 +119,7 @@ const ProblemSection = () => {
           </ScrollReveal>
 
           {/* Right — Sky */}
-          <ScrollReveal direction="right" className="relative">
+          <ScrollReveal direction="right" duration={0.7} className="relative">
             <motion.div
               className="relative h-[320px] md:h-[420px] overflow-hidden rounded-r-card md:rounded-r-card rounded-b-card md:rounded-bl-none"
               style={{ y: parallaxY }}
@@ -136,9 +129,7 @@ const ProblemSection = () => {
                 alt="eVTOL aircraft flying peacefully above the city"
                 className="w-full h-full object-cover"
               />
-              {/* Blue gradient overlay */}
               <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-transparent to-primary/10" />
-              {/* Caption */}
               <div className="absolute bottom-4x right-4x text-right">
                 <span className="font-sub text-body-sm text-foreground tracking-wide-futuristic uppercase">
                   Minutes in the Sky
@@ -154,7 +145,7 @@ const ProblemSection = () => {
         {/* Statistics Row */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6x">
           {stats.map((stat, i) => (
-            <ScrollReveal key={i} delay={0.15 * i} className="text-center">
+            <ScrollReveal key={i} delay={0.12 * i} className="text-center">
               <div className="font-heading text-[42px] leading-[1.1] text-primary tracking-futuristic mb-2x">
                 <CountUp target={stat.number} />
                 {stat.suffix}

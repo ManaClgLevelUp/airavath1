@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { useIsMobile } from "@/hooks/use-mobile";
 import ScrollReveal from "@/components/ScrollReveal";
 
 interface ComparisonBlockProps {
@@ -24,12 +25,14 @@ const ComparisonBlock = ({
   solutionCaption,
 }: ComparisonBlockProps) => {
   const sectionRef = useRef<HTMLElement>(null);
+  const isMobile = useIsMobile();
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"],
   });
 
-  const parallaxY = useTransform(scrollYProgress, [0, 1], ["0%", "10%"]);
+  // Disable parallax on mobile for performance
+  const parallaxY = useTransform(scrollYProgress, [0, 1], isMobile ? ["0%", "0%"] : ["0%", "10%"]);
 
   return (
     <section
@@ -39,14 +42,14 @@ const ComparisonBlock = ({
     >
       <div className="container-airavath">
         {/* Heading */}
-        <ScrollReveal className="flex flex-col items-center text-center mb-3x">
+        <ScrollReveal delay={0.12} className="flex flex-col items-center text-center mb-3x">
           <h2 className="font-heading font-semibold text-section text-foreground tracking-futuristic max-w-[720px]">
             {heading}
           </h2>
         </ScrollReveal>
 
         {/* Supporting text */}
-        <ScrollReveal delay={0.15} className="flex justify-center mb-12x">
+        <ScrollReveal delay={0.2} className="flex justify-center mb-12x">
           <p className="font-body text-body-lg text-titanium text-center max-w-[640px] leading-[1.6]">
             {description}
           </p>
@@ -55,7 +58,7 @@ const ComparisonBlock = ({
         {/* Split Visual Comparison */}
         <div className="relative grid grid-cols-1 md:grid-cols-2 gap-0">
           {/* Left — Problem */}
-          <ScrollReveal direction="left" className="relative">
+          <ScrollReveal direction="left" duration={0.7} className="relative">
             <motion.div
               className="relative h-[320px] md:h-[420px] overflow-hidden rounded-l-card md:rounded-l-card rounded-t-card md:rounded-tr-none"
               style={{ y: parallaxY }}
@@ -75,7 +78,7 @@ const ComparisonBlock = ({
           </ScrollReveal>
 
           {/* Right — Solution */}
-          <ScrollReveal direction="right" className="relative">
+          <ScrollReveal direction="right" duration={0.7} className="relative">
             <motion.div
               className="relative h-[320px] md:h-[420px] overflow-hidden rounded-r-card md:rounded-r-card rounded-b-card md:rounded-bl-none"
               style={{ y: parallaxY }}

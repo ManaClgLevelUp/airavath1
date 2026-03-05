@@ -1,11 +1,12 @@
 import { useRef } from "react";
-import { motion, useScroll, useTransform, useInView } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useIsMobile } from "@/hooks/use-mobile";
+import ScrollReveal from "@/components/ScrollReveal";
 import visionSkyline from "@/assets/vision-skyline.jpg";
 
 /* ── Aircraft formation dots ── */
 const AircraftFormation = () => (
   <div className="absolute inset-0 pointer-events-none overflow-hidden">
-    {/* V-formation: 5 aircraft dots */}
     {[
       { x: 0, y: 0, delay: 0 },
       { x: -40, y: -30, delay: 0.4 },
@@ -37,15 +38,14 @@ const AircraftFormation = () => (
 
 const VisionSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(contentRef, { once: true, margin: "-100px" });
+  const isMobile = useIsMobile();
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"],
   });
 
-  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const bgY = useTransform(scrollYProgress, [0, 1], isMobile ? ["0%", "0%"] : ["0%", "30%"]);
 
   return (
     <section
@@ -79,41 +79,34 @@ const VisionSection = () => {
       <AircraftFormation />
 
       {/* Content */}
-      <div ref={contentRef} className="relative z-10 container-airavath">
+      <div className="relative z-10 container-airavath">
         <div className="flex flex-col items-center text-center max-w-[760px] mx-auto">
           {/* Label */}
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
-            className="font-heading text-[28px] font-medium text-primary mb-[24px]"
-            style={{ letterSpacing: "2px" }}
-          >
-            Our Vision
-          </motion.p>
+          <ScrollReveal delay={0} duration={0.7}>
+            <p
+              className="font-heading text-[28px] font-medium text-primary mb-[24px]"
+              style={{ letterSpacing: "2px" }}
+            >
+              Our Vision
+            </p>
+          </ScrollReveal>
 
           {/* Statement */}
-          <motion.h2
-            initial={{ opacity: 0, scale: 0.92 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ duration: 1.2, delay: 0.2, ease: "easeOut" }}
-            className="font-heading text-[40px] md:text-[64px] font-semibold text-foreground leading-[1.15] mb-[32px] tracking-futuristic"
-          >
-            A World Where Cities Move Through the Sky
-          </motion.h2>
+          <ScrollReveal direction="scale" delay={0.15} duration={1}>
+            <h2 className="font-heading text-[40px] md:text-[64px] font-semibold text-foreground leading-[1.15] mb-[32px] tracking-futuristic">
+              A World Where Cities Move Through the Sky
+            </h2>
+          </ScrollReveal>
 
           {/* Supporting text */}
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            className="font-body text-[18px] leading-[1.6] text-titanium max-w-[620px]"
-          >
-            AIRAVATH envisions a future where urban mobility extends beyond roads
-            and railways. By connecting cities through electric aviation
-            infrastructure, we aim to redefine how people move across the world's
-            most dynamic urban environments.
-          </motion.p>
+          <ScrollReveal delay={0.35} duration={0.7}>
+            <p className="font-body text-[18px] leading-[1.6] text-titanium max-w-[620px]">
+              AIRAVATH envisions a future where urban mobility extends beyond roads
+              and railways. By connecting cities through electric aviation
+              infrastructure, we aim to redefine how people move across the world's
+              most dynamic urban environments.
+            </p>
+          </ScrollReveal>
         </div>
       </div>
     </section>
