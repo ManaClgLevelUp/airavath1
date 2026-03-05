@@ -16,7 +16,7 @@ export default {
       fontFamily: {
         heading: ["Orbitron", "sans-serif"],
         sub: ["Space Grotesk", "sans-serif"],
-        body: ["Inter", "sans-serif"],
+        body: ["Poppins", "sans-serif"],
       },
       fontSize: {
         "hero": ["72px", { lineHeight: "1.1", letterSpacing: "0.04em" }],
