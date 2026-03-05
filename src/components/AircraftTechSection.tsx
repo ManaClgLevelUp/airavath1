@@ -75,12 +75,12 @@ const AircraftTechSection = () => {
         </ScrollReveal>
 
         {/* Cinematic Aircraft Visual */}
-        <div className="mt-[120px]"><ScrollReveal delay={0.2} className="flex justify-center">
+        <div className="mt-[100px]"><ScrollReveal delay={0.2} className="flex justify-center">
           <motion.div
-            className="relative max-w-[1100px] w-full"
+            className="relative max-w-[1200px] w-full"
             animate={{
-              y: [0, -12, 0],
-              rotate: [0, 0.5, 0, -0.5, 0],
+              y: [0, -16, 0],
+              rotate: [0, 0.4, 0, -0.4, 0],
             }}
             transition={{
               duration: 18,
@@ -88,13 +88,20 @@ const AircraftTechSection = () => {
               ease: "easeInOut",
             }}
           >
-            <img
-              src={aircraftHero}
-              alt="Futuristic eVTOL aircraft in flight at sunset"
-              className="w-full h-auto rounded-card object-cover max-h-[520px]"
-            />
+            {/* Outer glow frame */}
+            <div className="absolute -inset-[1px] rounded-2xl bg-gradient-to-br from-primary/30 via-transparent to-primary/20 blur-sm" />
+            <div className="relative rounded-2xl overflow-hidden border border-primary/10">
+              <img
+                src={aircraftHero}
+                alt="Futuristic eVTOL aircraft in flight over city at night with glowing propulsion"
+                className="w-full h-auto object-cover max-h-[560px]"
+              />
+              {/* Cinematic overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5" />
+            </div>
             {/* Glow beneath aircraft */}
-            <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-3/4 h-24 bg-primary/8 blur-3xl rounded-full" />
+            <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-4/5 h-28 bg-primary/10 blur-3xl rounded-full" />
           </motion.div>
         </ScrollReveal></div>
 
