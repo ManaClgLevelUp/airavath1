@@ -77,8 +77,7 @@ const ProblemSection = () => {
     offset: ["start end", "end start"],
   });
 
-  const trafficY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
-  const skyY = useTransform(scrollYProgress, [0, 1], ["0%", "8%"]);
+  const parallaxY = useTransform(scrollYProgress, [0, 1], ["0%", "10%"]);
 
   return (
     <section
@@ -108,7 +107,7 @@ const ProblemSection = () => {
           <ScrollReveal direction="left" className="relative">
             <motion.div
               className="relative h-[320px] md:h-[420px] overflow-hidden rounded-l-card md:rounded-l-card rounded-t-card md:rounded-tr-none"
-              style={{ y: trafficY }}
+              style={{ y: parallaxY }}
             >
               <img
                 src={problemTraffic}
@@ -130,7 +129,7 @@ const ProblemSection = () => {
           <ScrollReveal direction="right" className="relative">
             <motion.div
               className="relative h-[320px] md:h-[420px] overflow-hidden rounded-r-card md:rounded-r-card rounded-b-card md:rounded-bl-none"
-              style={{ y: skyY }}
+              style={{ y: parallaxY }}
             >
               <img
                 src={problemSky}
