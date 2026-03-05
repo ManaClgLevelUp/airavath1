@@ -48,6 +48,14 @@ const VerticalTimeline = () => {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
   const [started, setStarted] = useState(false);
 
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start center", "end center"],
+  });
+
+  const aircraftTop = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const lineScaleY = useTransform(scrollYProgress, [0, 1], [0, 1]);
+
   useEffect(() => {
     if (isInView) setStarted(true);
   }, [isInView]);
@@ -57,13 +65,10 @@ const VerticalTimeline = () => {
       {/* Background vertical line */}
       <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-px bg-primary/10 md:-translate-x-px" />
 
-      {/* Animated fill line */}
+      {/* Animated fill line — scroll-driven */}
       <motion.div
         className="absolute left-8 md:left-1/2 top-0 w-px bg-gradient-to-b from-primary via-primary to-primary/30 origin-top md:-translate-x-px"
-        initial={{ scaleY: 0 }}
-        animate={started ? { scaleY: 1 } : {}}
-        transition={{ duration: 3, ease: "easeInOut" }}
-        style={{ height: "100%" }}
+        style={{ height: "100%", scaleY: lineScaleY }}
       />
 
       {/* Steps */}
@@ -166,35 +171,27 @@ const VerticalTimeline = () => {
         })}
       </div>
 
-      {/* Aircraft traveling down the timeline */}
-      {started && (
-        <motion.div
-          className="absolute left-8 md:left-1/2 -translate-x-1/2 z-30"
-          animate={{ top: ["0%", "100%"] }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "linear",
-            repeatDelay: 3,
-          }}
-        >
-          <div className="relative">
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              className="text-primary rotate-180 drop-shadow-[0_0_12px_hsl(189_100%_50%/0.7)]"
-            >
-              <path
-                d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"
-                fill="currentColor"
-              />
-            </svg>
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-primary/20 rounded-full blur-lg" />
-          </div>
-        </motion.div>
-      )}
+      {/* Aircraft following scroll */}
+      <motion.div
+        className="absolute left-8 md:left-1/2 -translate-x-1/2 z-30"
+        style={{ top: aircraftTop }}
+      >
+        <div className="relative">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            className="text-primary rotate-180 drop-shadow-[0_0_12px_hsl(189_100%_50%/0.7)]"
+          >
+            <path
+              d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"
+              fill="currentColor"
+            />
+          </svg>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-primary/20 rounded-full blur-lg" />
+        </div>
+      </motion.div>
     </div>
   );
 };
