@@ -127,8 +127,8 @@ const VertiportSection = () => {
     <section
       className="relative overflow-hidden"
       style={{
-        paddingTop: "180px",
-        paddingBottom: "180px",
+        paddingTop: "100px",
+        paddingBottom: "100px",
         background: "linear-gradient(180deg, hsl(0 0% 0%) 0%, hsl(0 0% 0.8%) 100%)",
       }}
     >
@@ -150,14 +150,14 @@ const VertiportSection = () => {
       <div className="container-airavath relative z-10">
         {/* Heading */}
         <ScrollReveal className="flex flex-col items-center text-center mb-3x">
-          <h2 className="font-heading font-semibold text-section text-foreground tracking-futuristic max-w-[760px]">
+          <h2 className="font-heading font-semibold text-[28px] sm:text-[36px] md:text-section text-foreground tracking-futuristic max-w-[760px] px-2">
             Vertiport Infrastructure Network
           </h2>
         </ScrollReveal>
 
         {/* Supporting text */}
-        <ScrollReveal delay={0.15} className="flex justify-center mb-[120px]">
-          <p className="font-body text-body-lg text-titanium text-center max-w-[720px] leading-[1.6]">
+        <ScrollReveal delay={0.15} className="flex justify-center mb-16 md:mb-[120px]">
+          <p className="font-body text-[15px] md:text-body-lg text-titanium text-center max-w-[720px] leading-[1.6] px-4">
             AIRAVATH will deploy strategically located vertiports across major cities, enabling
             seamless take-off and landing operations while creating a scalable aerial mobility
             network connecting key urban destinations.
