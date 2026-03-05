@@ -10,8 +10,8 @@ const TourismSection = () => (
     problemAlt="Tourists stuck in crowded traffic bus"
     problemCaption="Hours Lost on the Road"
     solutionImage={solutionTourism}
-    solutionAlt="Luxury eVTOL aircraft flying above scenic city landmarks with passengers"
-    solutionCaption="Luxury Aerial City Tours"
+    solutionAlt="Luxury eVTOL aircraft flying above scenic city landmarks"
+    solutionCaption="Luxury Aerial City Travel"
   />
 );
 
