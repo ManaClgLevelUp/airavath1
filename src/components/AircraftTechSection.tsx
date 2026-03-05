@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { Zap, PlaneTakeoff, Volume2, Navigation, Play } from "lucide-react";
+import { Zap, PlaneTakeoff, Volume2, Navigation } from "lucide-react";
 import { motion } from "framer-motion";
 import ScrollReveal from "@/components/ScrollReveal";
 import aircraftHero from "@/assets/aircraft-hero-tech.jpg";
@@ -32,8 +31,6 @@ const features = [
 ];
 
 const AircraftTechSection = () => {
-  const [isPlaying, setIsPlaying] = useState(false);
-
   return (
     <section
       id="technology"
@@ -79,54 +76,33 @@ const AircraftTechSection = () => {
 
         {/* Cinematic Aircraft Visual */}
         <div className="mt-[100px]"><ScrollReveal delay={0.2} className="flex justify-center">
-          <div className="relative max-w-[1200px] w-full">
+          <motion.div
+            className="relative max-w-[1200px] w-full"
+            animate={{
+              y: [0, -16, 0],
+              rotate: [0, 0.4, 0, -0.4, 0],
+            }}
+            transition={{
+              duration: 18,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          >
             {/* Outer glow frame */}
             <div className="absolute -inset-[1px] rounded-2xl bg-gradient-to-br from-primary/30 via-transparent to-primary/20 blur-sm" />
             <div className="relative rounded-2xl overflow-hidden border border-primary/10">
-              {isPlaying ? (
-                <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
-                  <iframe
-                    className="absolute inset-0 w-full h-full"
-                    src="https://www.youtube.com/embed/jLCOmyfjMvE?autoplay=1&rel=0&modestbranding=1"
-                    title="eVTOL Aircraft Technology"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
-                </div>
-              ) : (
-                <div
-                  className="relative cursor-pointer group"
-                  onClick={() => setIsPlaying(true)}
-                >
-                  <img
-                    src={aircraftHero}
-                    alt="eVTOL aircraft technology showcase"
-                    className="w-full h-auto object-cover max-h-[560px]"
-                  />
-                  {/* Dark overlay */}
-                  <div className="absolute inset-0 bg-background/40 group-hover:bg-background/30 transition-colors duration-300" />
-                  {/* Play button */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <motion.div
-                      className="w-20 h-20 rounded-full bg-primary/90 flex items-center justify-center backdrop-blur-sm shadow-[0_0_40px_hsl(189_100%_50%/0.4)] group-hover:shadow-[0_0_60px_hsl(189_100%_50%/0.6)] group-hover:scale-110 transition-all duration-300"
-                      animate={{ scale: [1, 1.05, 1] }}
-                      transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                    >
-                      <Play className="w-8 h-8 text-primary-foreground ml-1" fill="currentColor" />
-                    </motion.div>
-                  </div>
-                  {/* Caption */}
-                  <div className="absolute bottom-6 left-1/2 -translate-x-1/2">
-                    <span className="font-sub text-body-sm text-foreground/80 tracking-wide-futuristic uppercase">
-                      Watch the Future of Flight
-                    </span>
-                  </div>
-                </div>
-              )}
+              <img
+                src={aircraftHero}
+                alt="Futuristic eVTOL aircraft in flight over city at night with glowing propulsion"
+                className="w-full h-auto object-cover max-h-[560px]"
+              />
+              {/* Cinematic overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5" />
             </div>
-            {/* Glow beneath */}
+            {/* Glow beneath aircraft */}
             <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-4/5 h-28 bg-primary/10 blur-3xl rounded-full" />
-          </div>
+          </motion.div>
         </ScrollReveal></div>
 
         {/* Technology Feature Row */}
