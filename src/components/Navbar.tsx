@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import airavathLogo from "@/assets/airavath-logo.jpeg";
+import airavathLogo from "@/assets/airavath-logo.png";
 
 const navLinks = [
   { label: "Home", href: "#home" },
