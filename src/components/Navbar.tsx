@@ -107,7 +107,7 @@ const Navbar = () => {
 
             {/* CTA — right side */}
             <div className="hidden lg:block flex-shrink-0">
-              <Button variant="nav" size="nav">
+              <Button variant="nav" size="nav" onClick={() => { document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }); }}>
                 Join The Future
               </Button>
             </div>
@@ -183,7 +183,7 @@ const Navbar = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.4, duration: 0.3 }}
                   >
-                    <Button variant="nav" size="nav" className="w-full">
+                    <Button variant="nav" size="nav" className="w-full" onClick={() => { setMobileOpen(false); document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }); }}>
                       Join The Future
                     </Button>
                   </motion.div>
