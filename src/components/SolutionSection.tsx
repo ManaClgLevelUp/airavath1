@@ -111,15 +111,15 @@ const SolutionSection = () => {
             <ScrollReveal key={pillar.title} delay={0.2 * i}>
               <div className="group bg-card border border-border rounded-card overflow-hidden hover:-translate-y-2 hover:shadow-[0_0_30px_hsl(189_100%_50%/0.15)] transition-all duration-500 h-full flex flex-col">
                 {/* Image */}
-                <div className="relative h-[200px] overflow-hidden">
+                <div className="relative h-[260px] overflow-hidden">
                   <img
                     src={pillar.image}
                     alt={pillar.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-card via-card/30 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-card via-card/20 to-transparent" />
                   {/* Icon badge */}
-                  <div className="absolute top-4 left-4 w-10 h-10 rounded-lg bg-background/60 backdrop-blur-sm border border-border flex items-center justify-center">
+                  <div className="absolute top-4 left-4 w-11 h-11 rounded-xl bg-background/70 backdrop-blur-md border border-primary/20 flex items-center justify-center shadow-[0_0_15px_hsl(189_100%_50%/0.2)]">
                     <pillar.icon className="w-5 h-5 text-primary" />
                   </div>
                 </div>
