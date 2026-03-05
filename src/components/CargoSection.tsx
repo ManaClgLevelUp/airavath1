@@ -11,7 +11,7 @@ const CargoSection = () => (
     problemCaption="Delays in Ground Logistics"
     solutionImage={solutionCargo}
     solutionAlt="Cargo eVTOL aircraft transporting packages across city skyline"
-    solutionCaption="Fast Aerial Cargo Delivery"
+    solutionCaption="Rapid Aerial Cargo Delivery"
   />
 );
 

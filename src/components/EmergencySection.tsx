@@ -11,7 +11,7 @@ const EmergencySection = () => (
     problemCaption="Minutes Lost in Traffic"
     solutionImage={solutionMedical}
     solutionAlt="AIRAVATH eVTOL air ambulance landing on hospital rooftop"
-    solutionCaption="Rapid Aerial Medical Transport"
+    solutionCaption="Emergency Care Without Delays"
   />
 );
 
