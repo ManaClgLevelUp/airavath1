@@ -12,6 +12,7 @@ const CargoSection = () => (
     solutionImage={solutionCargo}
     solutionAlt="Cargo eVTOL aircraft transporting packages across city skyline"
     solutionCaption="Rapid Aerial Cargo Delivery"
+    index={2}
   />
 );
 

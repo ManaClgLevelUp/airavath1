@@ -12,6 +12,8 @@ const TourismSection = () => (
     solutionImage={solutionTourism}
     solutionAlt="Luxury eVTOL aircraft flying above scenic city landmarks"
     solutionCaption="Luxury Aerial City Travel"
+    index={3}
+    isLast
   />
 );
 
