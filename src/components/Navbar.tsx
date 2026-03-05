@@ -15,11 +15,41 @@ const navLinks = [
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", handleScroll);
+    let lastY = window.scrollY;
+    let ticking = false;
+
+    const update = () => {
+      const y = window.scrollY;
+      const isDesktop = window.innerWidth > 1024;
+
+      setScrolled(y > 50);
+
+      if (isDesktop) {
+        if (y > 80 && y - lastY > 0) {
+          setHidden(true);
+        } else if (lastY - y > 30 || y <= 80) {
+          setHidden(false);
+        }
+      } else {
+        setHidden(false);
+      }
+
+      lastY = y;
+      ticking = false;
+    };
+
+    const handleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(update);
+        ticking = true;
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -28,7 +58,9 @@ const Navbar = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className={`fixed top-0 left-0 right-0 z-50 h-[88px] flex items-center transition-all duration-500 ${
+      className={`fixed top-0 left-0 right-0 z-50 h-[88px] flex items-center transition-all duration-300 ease-in-out ${
+        hidden ? "-translate-y-full" : "translate-y-0"
+      } ${
         scrolled
           ? "bg-background/65 backdrop-blur-xl border-b border-border"
           : "bg-transparent"
