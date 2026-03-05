@@ -61,11 +61,9 @@ const Navbar = () => {
     <>
       <motion.nav
         initial={{ y: -20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out ${
-          hidden ? "-translate-y-full" : "translate-y-0"
-        } ${
+        animate={{ y: hidden ? "-100%" : 0, opacity: 1 }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
+        className={`fixed top-0 left-0 right-0 z-50 ${
           scrolled
             ? "bg-background/65 backdrop-blur-[12px] border-b border-border"
             : "bg-transparent border-b border-transparent"
