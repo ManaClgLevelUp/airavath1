@@ -1,6 +1,8 @@
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import { Linkedin, Twitter, Youtube, ArrowUpRight, ChevronUp } from "lucide-react";
+import { doc, onSnapshot } from "firebase/firestore";
+import { db } from "@/lib/firebase";
 import airavathLogo from "@/assets/airavath-logo.png";
 
 const navColumns = [
@@ -30,15 +32,30 @@ const navColumns = [
   },
 ];
 
-const socials = [
-  { icon: Linkedin, label: "LinkedIn", href: "#" },
-  { icon: Twitter, label: "X (Twitter)", href: "#" },
-  { icon: Youtube, label: "YouTube", href: "#" },
-];
+interface SiteSettings {
+  logo_url?: string;
+  linkedin_url?: string;
+  twitter_url?: string;
+  youtube_url?: string;
+}
 
 const FooterSection = () => {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const [settings, setSettings] = useState<SiteSettings>({});
+
+  useEffect(() => {
+    const unsub = onSnapshot(doc(db, "website_settings", "main"), (snap) => {
+      if (snap.exists()) setSettings(snap.data() as SiteSettings);
+    });
+    return unsub;
+  }, []);
+
+  const socials = [
+    { icon: Linkedin, label: "LinkedIn", href: settings.linkedin_url || "#" },
+    { icon: Twitter, label: "X (Twitter)", href: settings.twitter_url || "#" },
+    { icon: Youtube, label: "YouTube", href: settings.youtube_url || "#" },
+  ];
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
@@ -51,7 +68,7 @@ const FooterSection = () => {
 
   return (
     <footer ref={ref} className="relative overflow-hidden bg-background">
-      {/* Top separator – glowing line */}
+      {/* Top separator */}
       <div className="relative h-px w-full">
         <div className="absolute inset-0 bg-border" />
         <motion.div
@@ -63,11 +80,10 @@ const FooterSection = () => {
         />
       </div>
 
-      {/* Ambient background effects */}
+      {/* Ambient background */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full bg-primary/[0.03] blur-[120px]" />
         <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] rounded-full bg-primary/[0.02] blur-[100px]" />
-        {/* Subtle grid */}
         <div className="absolute inset-0 grid-overlay opacity-[0.04]" />
       </div>
 
@@ -88,7 +104,6 @@ const FooterSection = () => {
       </div>
 
       <div className="relative z-10 container-airavath">
-        {/* Main footer content */}
         <div className="pt-16 pb-10 md:pt-20 md:pb-12">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8">
             {/* Brand column */}
@@ -98,17 +113,18 @@ const FooterSection = () => {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, delay: 0.1 }}
             >
-              <img src={airavathLogo} alt="AIRAVATH" className="h-10 w-auto mb-5 self-start" />
+              <img src={settings.logo_url || airavathLogo} alt="AIRAVATH" className="h-10 w-auto mb-5 self-start" />
               <p className="font-sub text-body-sm text-muted-foreground leading-relaxed max-w-[280px]">
                 Pioneering the future of urban air mobility with electric vertical takeoff aircraft and intelligent vertiport networks.
               </p>
 
-              {/* Socials */}
               <div className="flex gap-3 mt-8">
                 {socials.map((s, i) => (
                   <motion.a
                     key={s.label}
                     href={s.href}
+                    target={s.href.startsWith("http") ? "_blank" : undefined}
+                    rel={s.href.startsWith("http") ? "noopener noreferrer" : undefined}
                     aria-label={s.label}
                     className="group relative w-10 h-10 rounded-lg border border-border bg-card/50 flex items-center justify-center
                                hover:border-primary/50 hover:bg-primary/10 transition-all duration-300"
@@ -159,7 +175,7 @@ const FooterSection = () => {
               </motion.div>
             ))}
 
-            {/* CTA / Newsletter hint column */}
+            {/* CTA column */}
             <motion.div
               className="md:col-span-2 flex flex-col"
               initial={{ opacity: 0, y: 30 }}
@@ -197,7 +213,6 @@ const FooterSection = () => {
             © 2026 AIRAVATH. All rights reserved. Designed for the skies of tomorrow.
           </p>
 
-          {/* Back to top */}
           <motion.button
             onClick={scrollToTop}
             className="group flex items-center gap-2 font-sub text-[12px] text-muted-foreground

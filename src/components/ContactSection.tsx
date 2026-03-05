@@ -3,6 +3,8 @@ import { useRef, useState } from "react";
 import { TrendingUp, Handshake, Mic } from "lucide-react";
 import { z } from "zod";
 import { useToast } from "@/hooks/use-toast";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { db } from "@/lib/firebase";
 
 const inquirySchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100),
@@ -39,8 +41,9 @@ const ContactSection = () => {
 
   const [form, setForm] = useState({ name: "", email: "", type: "", message: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [submitting, setSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const result = inquirySchema.safeParse(form);
     if (!result.success) {
@@ -52,8 +55,23 @@ const ContactSection = () => {
       return;
     }
     setErrors({});
-    toast({ title: "Inquiry Submitted", description: "We'll get back to you shortly." });
-    setForm({ name: "", email: "", type: "", message: "" });
+    setSubmitting(true);
+    try {
+      await addDoc(collection(db, "inquiries"), {
+        name: form.name.trim(),
+        email: form.email.trim(),
+        inquiry_type: form.type,
+        message: form.message.trim(),
+        timestamp: serverTimestamp(),
+        read: false,
+      });
+      toast({ title: "Inquiry Submitted", description: "We'll get back to you shortly." });
+      setForm({ name: "", email: "", type: "", message: "" });
+    } catch {
+      toast({ title: "Submission failed", description: "Please try again.", variant: "destructive" });
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const inputClass =
@@ -66,11 +84,9 @@ const ContactSection = () => {
       className="relative overflow-hidden section-padding"
       style={{ background: "linear-gradient(180deg, #000000, #020202)" }}
     >
-      {/* Background grid */}
       <div className="absolute inset-0 grid-overlay opacity-[0.06] pointer-events-none" />
 
       <div className="container-airavath relative z-10">
-        {/* Heading */}
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -90,7 +106,6 @@ const ContactSection = () => {
           organizations interested in shaping the future of urban air mobility.
         </motion.p>
 
-        {/* Inquiry channel cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-[40px] mb-[120px]">
           {channels.map((ch, i) => (
             <motion.div
@@ -113,7 +128,6 @@ const ContactSection = () => {
           ))}
         </div>
 
-        {/* Contact form */}
         <motion.form
           onSubmit={handleSubmit}
           initial={{ opacity: 0, y: 40 }}
@@ -174,9 +188,10 @@ const ContactSection = () => {
 
           <button
             type="submit"
-            className="w-full h-[56px] rounded-[8px] bg-primary text-primary-foreground font-sub text-[14px] font-medium hover:scale-[1.02] hover:shadow-[0_0_24px_hsl(189_100%_50%/0.4)] transition-all duration-300"
+            disabled={submitting}
+            className="w-full h-[56px] rounded-[8px] bg-primary text-primary-foreground font-sub text-[14px] font-medium hover:scale-[1.02] hover:shadow-[0_0_24px_hsl(189_100%_50%/0.4)] transition-all duration-300 disabled:opacity-50"
           >
-            Submit Inquiry
+            {submitting ? "Submitting..." : "Submit Inquiry"}
           </button>
         </motion.form>
       </div>
