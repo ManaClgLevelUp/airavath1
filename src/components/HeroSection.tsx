@@ -109,7 +109,12 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 1.0 }}
           >
-            <Button variant="hero" size="lg" className="md:w-auto w-full">
+            <Button
+              variant="hero"
+              size="lg"
+              className="md:w-auto w-full"
+              onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+            >
               Join The Future
             </Button>
           </motion.div>
