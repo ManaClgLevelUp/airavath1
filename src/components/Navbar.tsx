@@ -71,8 +71,8 @@ const Navbar = () => {
         role="navigation"
         aria-label="Main navigation"
       >
-        <div className="pt-3x">
-          <div className="container-airavath h-[88px] flex items-center">
+        <div>
+          <div className="container-airavath h-[64px] flex items-center">
             {/* Logo — cols 1-3 */}
             <a
               href="#home"
