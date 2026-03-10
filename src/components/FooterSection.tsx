@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
-import { Linkedin, Twitter, Youtube, ArrowUpRight, ChevronUp } from "lucide-react";
+import { Linkedin, Twitter, Youtube, ArrowUpRight, ChevronUp, Mail, Phone } from "lucide-react";
 import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import airavathLogo from "@/assets/airavath-logo.png";
@@ -15,10 +15,10 @@ const navColumns = [
     ],
   },
   {
-    title: "Technology",
+    title: "Operations",
     links: [
-      { label: "Aircraft Tech", href: "#technology" },
-      { label: "Vertiport Infra", href: "#vertiport" },
+      { label: "Aircraft Operations", href: "#technology" },
+      { label: "Mobility Hubs", href: "#vertiport" },
       { label: "How It Works", href: "#how-it-works" },
     ],
   },
@@ -114,11 +114,23 @@ const FooterSection = () => {
               transition={{ duration: 0.7, delay: 0.1 }}
             >
               <img src={settings.logo_url || airavathLogo} alt="AIRAVATH" className="h-10 w-auto mb-5 self-start" />
-              <p className="font-sub text-body-sm text-muted-foreground leading-relaxed max-w-[280px]">
-                Pioneering the future of urban air mobility with electric vertical takeoff aircraft and intelligent vertiport networks.
+              <p className="font-sub text-body-sm text-muted-foreground leading-relaxed max-w-[280px] mb-5">
+                Operating the future of urban air mobility with electric aircraft services and intelligent mobility hub networks.
               </p>
 
-              <div className="flex gap-3 mt-8">
+              {/* Contact Info */}
+              <div className="flex flex-col gap-2 mb-6">
+                <a href="mailto:pradyaviation@gmail.com" className="flex items-center gap-2 font-body text-body-sm text-muted-foreground hover:text-foreground transition-colors">
+                  <Mail size={14} className="text-primary" />
+                  <span>pradyaviation@gmail.com</span>
+                </a>
+                <a href="tel:+13213899564" className="flex items-center gap-2 font-body text-body-sm text-muted-foreground hover:text-foreground transition-colors">
+                  <Phone size={14} className="text-primary" />
+                  <span>+1 (321) 389-9564</span>
+                </a>
+              </div>
+
+              <div className="flex gap-3">
                 {socials.map((s, i) => (
                   <motion.a
                     key={s.label}
@@ -186,7 +198,7 @@ const FooterSection = () => {
                 Stay Updated
               </h4>
               <p className="font-body text-body-sm text-muted-foreground mb-4">
-                Get the latest on eVTOL breakthroughs and launches.
+                Get the latest on urban air mobility operations and launches.
               </p>
               <a
                 href="#contact"
@@ -195,7 +207,7 @@ const FooterSection = () => {
                            border border-border rounded-lg px-4 py-2.5 w-fit
                            hover:border-primary/50 hover:bg-primary/5 transition-all duration-300"
               >
-                <span>Join Waitlist</span>
+                <span>Get Connected</span>
                 <ArrowUpRight size={14} className="text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
               </a>
             </motion.div>
@@ -210,7 +222,7 @@ const FooterSection = () => {
           transition={{ duration: 0.7, delay: 0.7 }}
         >
           <p className="font-body text-[12px] text-muted-foreground">
-            © 2026 AIRAVATH. All rights reserved. Designed for the skies of tomorrow.
+            © 2026 AIRAVATH. All rights reserved.
           </p>
 
           <motion.button

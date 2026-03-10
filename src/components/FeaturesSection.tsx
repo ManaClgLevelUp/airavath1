@@ -4,43 +4,43 @@ import ScrollReveal from "@/components/ScrollReveal";
 const features = [
   {
     icon: Zap,
-    title: "Electric Propulsion",
-    description: "Advanced distributed electric propulsion system delivering silent, efficient vertical flight.",
+    title: "Electric Fleet",
+    description: "Operating a fleet of electric aircraft delivering silent, efficient vertical flight across cities.",
   },
   {
     icon: Shield,
-    title: "Autonomous Safety",
-    description: "Triple-redundant flight systems with AI-powered obstacle avoidance and emergency protocols.",
+    title: "Safety First",
+    description: "Triple-redundant flight systems with AI-powered navigation and emergency protocols ensure passenger safety.",
   },
   {
     icon: Leaf,
     title: "Zero Emissions",
-    description: "100% electric operation with sustainable manufacturing and carbon-neutral flight operations.",
+    description: "100% electric operations supporting carbon-neutral aerial mobility services.",
   },
   {
     icon: Gauge,
     title: "320 km/h Cruise",
-    description: "High-speed urban transit cutting commute times by 80% across metropolitan networks.",
+    description: "High-speed urban transit cutting commute times by 80% across city mobility networks.",
   },
 ];
 
 const FeaturesSection = () => {
   return (
-    <section id="technology" className="relative section-padding">
+    <section className="relative section-padding">
       <div className="container-airavath">
         <ScrollReveal>
           <p className="font-sub text-body-sm text-primary tracking-wide-futuristic uppercase mb-3x">
-            Core Technology
+            Operational Capabilities
           </p>
         </ScrollReveal>
         <ScrollReveal delay={0.1}>
           <h2 className="font-heading text-section text-foreground mb-4x max-w-3xl tracking-futuristic">
-            Engineering Tomorrow
+            Mobility Network Operations
           </h2>
         </ScrollReveal>
         <ScrollReveal delay={0.2}>
           <p className="font-body text-body-lg text-muted-foreground max-w-2xl mb-12x">
-            Built from the ground up with aerospace-grade precision and next-generation materials.
+            Operating aerial mobility services with precision, safety, and next-generation fleet management.
           </p>
         </ScrollReveal>
 

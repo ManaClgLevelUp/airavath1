@@ -1,4 +1,5 @@
 import { TrendingUp, Cpu, Building2 } from "lucide-react";
+import { Link } from "react-router-dom";
 import ScrollReveal from "@/components/ScrollReveal";
 import cardAirTaxi from "@/assets/card-air-taxi.jpg";
 import cardUam from "@/assets/card-uam.jpg";
@@ -6,22 +7,25 @@ import cardNextgen from "@/assets/card-nextgen.jpg";
 
 const aircraftCards = [
   {
-    title: "Electric Air Taxi",
+    title: "Medical Mobility",
     description:
-      "Vertical take-off aircraft designed for efficient, quiet, and sustainable transportation within cities.",
+      "Rapid aerial medical transport services connecting hospitals, emergency sites, and healthcare facilities across cities.",
     image: cardAirTaxi,
+    link: "/medical-mobility",
   },
   {
     title: "Urban Air Mobility",
     description:
-      "Advanced aircraft networks designed to move passengers across cities in minutes rather than hours.",
+      "On-demand passenger mobility services operating across city hubs, reducing travel time from hours to minutes.",
     image: cardUam,
+    link: "/cargo-logistics",
   },
   {
-    title: "Next-Generation Aviation",
+    title: "Cargo Logistics",
     description:
-      "Future electric aircraft platforms designed for scalable aerial mobility across global cities.",
+      "Aerial cargo delivery operations moving packages and supplies efficiently across urban networks.",
     image: cardNextgen,
+    link: "/cargo-logistics",
   },
 ];
 
@@ -29,17 +33,17 @@ const validationBlocks = [
   {
     icon: TrendingUp,
     title: "Rapid Industry Growth",
-    text: "Global investment in electric aviation is accelerating as cities search for faster mobility solutions.",
+    text: "Investment in urban air mobility is accelerating as cities search for faster mobility solutions.",
   },
   {
     icon: Cpu,
-    title: "Advanced Flight Technology",
-    text: "Breakthroughs in batteries, propulsion systems, and navigation technology are enabling electric aircraft.",
+    title: "Operational Technology",
+    text: "Breakthroughs in fleet management, navigation, and booking platforms are enabling scalable aerial mobility operations.",
   },
   {
     icon: Building2,
-    title: "Urban Infrastructure Development",
-    text: "Cities are beginning to develop vertiports and aerial mobility infrastructure.",
+    title: "Hub Infrastructure Development",
+    text: "Cities are beginning to develop vertiports and mobility hubs to support aerial transportation networks.",
   },
 ];
 
@@ -77,46 +81,44 @@ const FutureUAMSection = () => {
       </div>
 
       <div className="container-airavath relative z-10">
-        {/* Heading */}
         <ScrollReveal className="flex flex-col items-center text-center mb-3x">
           <h2 className="font-heading font-semibold text-section text-foreground tracking-futuristic max-w-[720px]">
-            The Future of Urban Air Mobility
+            Urban Air Mobility Network
           </h2>
         </ScrollReveal>
 
-        {/* Supporting text */}
         <ScrollReveal delay={0.15} className="flex justify-center mb-12x">
           <p className="font-body text-body-lg text-titanium text-center max-w-[700px] leading-[1.6]">
-            Electric vertical take-off and landing aircraft are redefining how cities move. By combining
-            electric propulsion, vertical lift capability, and intelligent flight systems, urban air
-            mobility enables faster and more sustainable transportation above city traffic.
+            AIRAVATH operates aerial mobility services across cities using electric vertical take-off
+            and landing aircraft. Our network connects mobility hubs to deliver fast, safe, and
+            sustainable transportation above city traffic.
           </p>
         </ScrollReveal>
 
-        {/* Aircraft Technology Grid */}
+        {/* Service Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12x">
           {aircraftCards.map((card, i) => (
             <ScrollReveal key={card.title} delay={0.2 * i}>
-              <div className="group bg-card border border-border rounded-card overflow-hidden hover:-translate-y-2 hover:shadow-[0_0_30px_hsl(189_100%_50%/0.15)] transition-all duration-500 h-full">
-                {/* Image */}
-                <div className="relative h-[200px] overflow-hidden">
-                  <img
-                    src={card.image}
-                    alt={card.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent" />
+              <Link to={card.link} className="block h-full">
+                <div className="group bg-card border border-border rounded-card overflow-hidden hover:-translate-y-2 hover:shadow-[0_0_30px_hsl(189_100%_50%/0.15)] transition-all duration-500 h-full">
+                  <div className="relative h-[200px] overflow-hidden">
+                    <img
+                      src={card.image}
+                      alt={card.title}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent" />
+                  </div>
+                  <div className="p-4x">
+                    <h3 className="font-sub text-feature text-foreground mb-2x">
+                      {card.title}
+                    </h3>
+                    <p className="font-body text-base text-titanium leading-[1.6]">
+                      {card.description}
+                    </p>
+                  </div>
                 </div>
-                {/* Content */}
-                <div className="p-4x">
-                  <h3 className="font-sub text-feature text-foreground mb-2x">
-                    {card.title}
-                  </h3>
-                  <p className="font-body text-base text-titanium leading-[1.6]">
-                    {card.description}
-                  </p>
-                </div>
-              </div>
+              </Link>
             </ScrollReveal>
           ))}
         </div>

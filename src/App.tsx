@@ -19,6 +19,9 @@ import Newsroom from "./pages/Newsroom";
 import NewsArticle from "./pages/NewsArticle";
 import Careers from "./pages/Careers";
 import JobDetail from "./pages/JobDetail";
+import MedicalMobility from "./pages/MedicalMobility";
+import CargoLogistics from "./pages/CargoLogistics";
+import TourismMobility from "./pages/TourismMobility";
 
 const queryClient = new QueryClient();
 
@@ -31,6 +34,9 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/medical-mobility" element={<MedicalMobility />} />
+            <Route path="/cargo-logistics" element={<CargoLogistics />} />
+            <Route path="/tourism-mobility" element={<TourismMobility />} />
             <Route path="/newsroom" element={<Newsroom />} />
             <Route path="/newsroom/:id" element={<NewsArticle />} />
             <Route path="/careers" element={<Careers />} />

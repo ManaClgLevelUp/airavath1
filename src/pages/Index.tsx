@@ -7,6 +7,7 @@ import CargoSection from "@/components/CargoSection";
 import TourismSection from "@/components/TourismSection";
 import FutureUAMSection from "@/components/FutureUAMSection";
 import SolutionSection from "@/components/SolutionSection";
+import EcosystemHubSection from "@/components/EcosystemHubSection";
 import AircraftTechSection from "@/components/AircraftTechSection";
 import VertiportSection from "@/components/VertiportSection";
 import HowItWorksSection from "@/components/HowItWorksSection";
@@ -29,6 +30,7 @@ const Index = () => {
       <TourismSection />
       <FutureUAMSection />
       <SolutionSection />
+      <EcosystemHubSection />
       <AircraftTechSection />
       <VertiportSection />
       <HowItWorksSection />

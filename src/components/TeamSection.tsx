@@ -12,31 +12,30 @@ interface TeamMember {
   image_url?: string;
 }
 
-// Fallback data when Firebase has no entries
 const fallbackTeam = [
   {
     id: "f1",
     name: "Founder / CEO",
     role: "Vision & Strategy",
-    description: "Leading AIRAVATH's mission to build the next generation of aerial mobility infrastructure.",
+    description: "Leading AIRAVATH's mission to operate the next generation of aerial mobility services.",
   },
   {
     id: "f2",
-    name: "Chief Technology Officer",
-    role: "Aviation Systems",
-    description: "Responsible for aircraft technology integration and advanced aviation engineering systems.",
+    name: "Chief Operations Officer",
+    role: "Network Operations",
+    description: "Responsible for fleet operations, route management, and mobility network coordination.",
   },
   {
     id: "f3",
     name: "Head of Infrastructure",
-    role: "Vertiport Network",
-    description: "Designing scalable vertiport infrastructure across major cities.",
+    role: "Mobility Hub Network",
+    description: "Designing and managing scalable mobility hub infrastructure across cities.",
   },
   {
     id: "f4",
-    name: "Head of Operations",
+    name: "Head of Platform",
     role: "Mobility Platform",
-    description: "Developing operational systems for AIRAVATH aerial mobility services.",
+    description: "Operating digital booking and fleet management systems for AIRAVATH aerial mobility services.",
   },
 ];
 
@@ -81,8 +80,8 @@ const TeamSection = () => {
           transition={{ duration: 0.7, delay: 0.15 }}
           className="font-body text-[18px] leading-[1.6] text-titanium text-center max-w-[720px] mx-auto mb-[120px]"
         >
-          AIRAVATH is assembling a multidisciplinary team of aviation engineers,
-          infrastructure experts, and mobility innovators dedicated to building
+          AIRAVATH is assembling a multidisciplinary team of operations experts,
+          infrastructure specialists, and mobility innovators dedicated to operating
           the future of urban air transportation.
         </motion.p>
 

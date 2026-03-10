@@ -9,21 +9,21 @@ const pillars = [
     icon: Plane,
     title: "Air Mobility Network",
     description:
-      "AIRAVATH will operate a network of electric vertical take-off aircraft enabling fast, safe, and luxurious urban air travel between key city destinations.",
+      "AIRAVATH operates a network of electric vertical take-off aircraft enabling fast, safe, and premium urban air mobility between key city destinations.",
     image: solutionNetwork,
   },
   {
     icon: Building,
-    title: "Vertiport Infrastructure",
+    title: "Mobility Hub Infrastructure",
     description:
-      "Strategically located vertiports across cities enable seamless take-off and landing operations from rooftops, airports, and business districts.",
+      "Strategically located vertiports and mobility hubs across cities enable seamless take-off and landing operations from rooftops, airports, and business districts.",
     image: solutionVertiport,
   },
   {
     icon: Smartphone,
     title: "On-Demand Air Platform",
     description:
-      "A digital platform that allows passengers to request air travel instantly and access premium aerial mobility within minutes.",
+      "A digital platform that allows passengers to request air mobility services instantly and access premium aerial transportation within minutes.",
     image: solutionPlatform,
   },
 ];
@@ -31,18 +31,18 @@ const pillars = [
 const highlights = [
   {
     icon: Layers,
-    title: "Integrated Ecosystem",
-    text: "Aircraft operations, infrastructure, and digital platforms combined into a unified mobility network.",
+    title: "Operating Ecosystem",
+    text: "Aircraft operations, hub infrastructure, and digital platforms combined into a unified mobility network.",
   },
   {
     icon: Globe,
-    title: "Scalable Infrastructure",
-    text: "Vertiport networks enable expansion across major global cities.",
+    title: "Scalable Across Cities",
+    text: "Mobility hub networks enable expansion across major cities.",
   },
   {
     icon: Leaf,
-    title: "Sustainable Aviation",
-    text: "Electric propulsion enables quieter and more environmentally responsible urban transportation.",
+    title: "Sustainable Operations",
+    text: "Electric aircraft operations enable quieter and more environmentally responsible urban transportation.",
   },
 ];
 
@@ -89,19 +89,17 @@ const SolutionSection = () => {
       </div>
 
       <div className="container-airavath relative z-10">
-        {/* Heading */}
         <ScrollReveal className="flex flex-col items-center text-center mb-3x">
           <h2 className="font-heading font-semibold text-section text-foreground tracking-futuristic max-w-[820px]">
-            AIRAVATH Is Building the Future of Urban Air Travel
+            Urban Air Mobility Ecosystem
           </h2>
         </ScrollReveal>
 
-        {/* Supporting text */}
         <ScrollReveal delay={0.15} className="flex justify-center mb-12x">
           <p className="font-body text-body-lg text-titanium text-center max-w-[720px] leading-[1.6]">
-            AIRAVATH is creating a complete urban air mobility ecosystem by integrating electric
-            aircraft operations, vertiport infrastructure, and an intelligent platform that enables
-            on-demand aerial transportation.
+            AIRAVATH operates a complete urban air mobility ecosystem by coordinating electric
+            aircraft operations, mobility hub infrastructure, and an intelligent platform that enables
+            on-demand aerial transportation across cities.
           </p>
         </ScrollReveal>
 
@@ -110,7 +108,6 @@ const SolutionSection = () => {
           {pillars.map((pillar, i) => (
             <ScrollReveal key={pillar.title} delay={0.2 * i}>
               <div className="group bg-card border border-border rounded-card overflow-hidden hover:-translate-y-2 hover:shadow-[0_0_30px_hsl(189_100%_50%/0.15)] transition-all duration-500 h-full flex flex-col">
-                {/* Image */}
                 <div className="relative h-[260px] overflow-hidden">
                   <img
                     src={pillar.image}
@@ -118,12 +115,10 @@ const SolutionSection = () => {
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-card via-card/20 to-transparent" />
-                  {/* Icon badge */}
                   <div className="absolute top-4 left-4 w-11 h-11 rounded-xl bg-background/70 backdrop-blur-md border border-primary/20 flex items-center justify-center shadow-[0_0_15px_hsl(189_100%_50%/0.2)]">
                     <pillar.icon className="w-5 h-5 text-primary" />
                   </div>
                 </div>
-                {/* Content */}
                 <div className="p-[36px] flex-1 flex flex-col">
                   <h3 className="font-sub text-feature text-foreground mb-2x">
                     {pillar.title}
@@ -137,7 +132,7 @@ const SolutionSection = () => {
           ))}
         </div>
 
-        {/* Investor Highlight Strip */}
+        {/* Highlight Strip */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6x" style={{ marginTop: "120px" }}>
           {highlights.map((block, i) => (
             <ScrollReveal key={block.title} delay={0.15 * i}>

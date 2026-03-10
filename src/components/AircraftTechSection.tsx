@@ -7,7 +7,7 @@ import aircraftSlide2 from "@/assets/aircraft-slide-2.jpg";
 import aircraftSlide3 from "@/assets/aircraft-slide-3.jpg";
 
 const slides = [
-  { src: aircraftSlide1, alt: "eVTOL aircraft flying over cyberpunk city at night" },
+  { src: aircraftSlide1, alt: "eVTOL aircraft flying over city at night" },
   { src: aircraftSlide2, alt: "eVTOL landing on vertiport at sunset" },
   { src: aircraftSlide3, alt: "eVTOL formation flying through city corridor" },
 ];
@@ -16,13 +16,13 @@ const features = [
     icon: Zap,
     title: "Electric Propulsion",
     description:
-      "Electric motors power the aircraft with lower emissions and reduced operational noise compared to traditional aviation systems.",
+      "Electric motors power the aircraft with lower emissions and reduced operational noise compared to traditional aviation.",
   },
   {
     icon: PlaneTakeoff,
     title: "Vertical Takeoff & Landing",
     description:
-      "Aircraft can take off and land vertically, eliminating the need for traditional runways and enabling urban operations.",
+      "Aircraft take off and land vertically, eliminating the need for runways and enabling operations from urban mobility hubs.",
   },
   {
     icon: Volume2,
@@ -32,9 +32,9 @@ const features = [
   },
   {
     icon: Navigation,
-    title: "Advanced Flight Systems",
+    title: "Intelligent Flight Operations",
     description:
-      "AI-assisted navigation and flight control systems improve safety, efficiency, and operational reliability.",
+      "AI-assisted navigation and fleet management systems improve safety, efficiency, and operational reliability across the network.",
   },
 ];
 
@@ -58,7 +58,6 @@ const AircraftTechSection = () => {
         background: "linear-gradient(180deg, hsl(0 0% 0%) 0%, hsl(0 0% 1.6%) 100%)",
       }}
     >
-      {/* Background effects */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0 grid-overlay opacity-[0.06]" />
         <svg className="absolute inset-0 w-full h-full opacity-[0.10]" xmlns="http://www.w3.org/2000/svg">
@@ -75,19 +74,17 @@ const AircraftTechSection = () => {
       </div>
 
       <div className="container-airavath relative z-10">
-        {/* Heading */}
         <ScrollReveal className="flex flex-col items-center text-center mb-3x">
           <h2 className="font-heading font-semibold text-section text-foreground tracking-futuristic max-w-[720px]">
-            Next-Generation Electric Aviation
+            Aircraft Operations
           </h2>
         </ScrollReveal>
 
-        {/* Supporting text */}
         <ScrollReveal delay={0.15} className="flex justify-center">
           <p className="font-body text-body-lg text-titanium text-center max-w-[720px] leading-[1.6]">
-            Electric vertical take-off and landing aircraft combine advanced propulsion systems,
-            lightweight materials, and intelligent navigation technology to enable safe and efficient
-            aerial mobility within modern cities.
+            AIRAVATH operates electric vertical take-off and landing aircraft that combine
+            advanced propulsion, lightweight design, and intelligent navigation to deliver safe
+            and efficient aerial mobility within modern cities.
           </p>
         </ScrollReveal>
 
@@ -95,7 +92,6 @@ const AircraftTechSection = () => {
         <div className="mt-[100px]">
           <ScrollReveal delay={0.2} className="flex justify-center">
             <div className="relative max-w-[1200px] w-full">
-              {/* Outer glow frame */}
               <div className="absolute -inset-[1px] rounded-2xl bg-gradient-to-br from-primary/30 via-transparent to-primary/20 blur-sm" />
               <div className="relative rounded-2xl overflow-hidden border border-primary/10 aspect-video">
                 <AnimatePresence mode="wait">
@@ -110,11 +106,9 @@ const AircraftTechSection = () => {
                     transition={{ duration: 1.2, ease: "easeInOut" }}
                   />
                 </AnimatePresence>
-                {/* Cinematic overlays */}
                 <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
                 <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5" />
               </div>
-              {/* Slide indicators */}
               <div className="flex justify-center gap-2 mt-6">
                 {slides.map((_, i) => (
                   <button
@@ -128,13 +122,12 @@ const AircraftTechSection = () => {
                   />
                 ))}
               </div>
-              {/* Glow beneath */}
               <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-4/5 h-28 bg-primary/10 blur-3xl rounded-full" />
             </div>
           </ScrollReveal>
         </div>
 
-        {/* Technology Feature Row */}
+        {/* Feature Row */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4x" style={{ marginTop: "120px" }}>
           {features.map((feature, i) => (
             <ScrollReveal key={feature.title} delay={0.15 * i} className="text-center">

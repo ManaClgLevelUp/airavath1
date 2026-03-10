@@ -47,7 +47,6 @@ const NetworkOverlay = () => (
       </linearGradient>
     </defs>
 
-    {/* Route lines */}
     {[
       "M180,380 Q350,200 550,260",
       "M550,260 Q700,180 900,320",
@@ -67,7 +66,6 @@ const NetworkOverlay = () => (
       />
     ))}
 
-    {/* Vertiport nodes */}
     {[
       { cx: 180, cy: 380 },
       { cx: 550, cy: 260 },
@@ -104,7 +102,6 @@ const NetworkOverlay = () => (
       </g>
     ))}
 
-    {/* Moving aircraft dot */}
     <motion.circle
       r="3"
       fill="hsl(189,100%,70%)"
@@ -132,7 +129,6 @@ const VertiportSection = () => {
         background: "linear-gradient(180deg, hsl(0 0% 0%) 0%, hsl(0 0% 0.8%) 100%)",
       }}
     >
-      {/* Background effects */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0 grid-overlay opacity-[0.06]" />
         <svg className="absolute inset-0 w-full h-full opacity-[0.08]" xmlns="http://www.w3.org/2000/svg">
@@ -148,23 +144,20 @@ const VertiportSection = () => {
       </div>
 
       <div className="container-airavath relative z-10">
-        {/* Heading */}
         <ScrollReveal className="flex flex-col items-center text-center mb-3x">
           <h2 className="font-heading font-semibold text-[28px] sm:text-[36px] md:text-section text-foreground tracking-futuristic max-w-[760px] px-2">
-            Vertiport Infrastructure Network
+            Mobility Hub Infrastructure
           </h2>
         </ScrollReveal>
 
-        {/* Supporting text */}
         <ScrollReveal delay={0.15} className="flex justify-center mb-16 md:mb-[120px]">
           <p className="font-body text-[15px] md:text-body-lg text-titanium text-center max-w-[720px] leading-[1.6] px-4">
-            AIRAVATH will deploy strategically located vertiports across major cities, enabling
-            seamless take-off and landing operations while creating a scalable aerial mobility
-            network connecting key urban destinations.
+            AIRAVATH operates strategically located vertiports and mobility hubs across cities,
+            enabling seamless take-off and landing operations while creating a scalable aerial
+            mobility network connecting key urban destinations.
           </p>
         </ScrollReveal>
 
-        {/* Network Visualization */}
         <ScrollReveal delay={0.2} className="flex justify-center mb-[120px]">
           <div className="relative max-w-[1100px] w-full rounded-card overflow-hidden">
             <img
@@ -173,12 +166,10 @@ const VertiportSection = () => {
               className="w-full h-auto max-h-[520px] object-cover"
             />
             <NetworkOverlay />
-            {/* Glow effect */}
             <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-2/3 h-16 bg-primary/10 blur-3xl rounded-full" />
           </div>
         </ScrollReveal>
 
-        {/* Vertiport Feature Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           {cards.map((card, i) => (
             <ScrollReveal key={card.title} delay={0.2 * i}>

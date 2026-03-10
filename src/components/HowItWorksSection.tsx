@@ -9,16 +9,16 @@ const steps = [
     number: "01",
     title: "Request Your Flight",
     description:
-      "Open the AIRAVATH platform and book your air travel in seconds. Select your destination, preferred time, and passenger count — all from your phone.",
+      "Open the AIRAVATH platform and book your aerial mobility service in seconds. Select your destination, preferred time, and passenger count — all from your phone.",
     stat: "< 30s",
     statLabel: "Booking Time",
   },
   {
     icon: MapPin,
     number: "02",
-    title: "Arrive at Vertiport",
+    title: "Arrive at Mobility Hub",
     description:
-      "Head to the nearest AIRAVATH vertiport. Strategically located across the city, every vertiport is designed for seamless passenger boarding with premium lounges.",
+      "Head to the nearest AIRAVATH mobility hub. Strategically located across the city, every hub is designed for seamless passenger boarding with premium lounges.",
     stat: "< 10 min",
     statLabel: "Avg. Distance",
   },
@@ -27,7 +27,7 @@ const steps = [
     number: "03",
     title: "Take Off",
     description:
-      "Board the electric aircraft and experience vertical liftoff. AI-assisted flight systems ensure a smooth, ultra-quiet departure from the vertiport rooftop.",
+      "Board the electric aircraft and experience vertical liftoff. AI-assisted flight operations ensure a smooth, ultra-quiet departure from the mobility hub.",
     stat: "65 dB",
     statLabel: "Noise Level",
   },
@@ -36,7 +36,7 @@ const steps = [
     number: "04",
     title: "Reach Your Destination",
     description:
-      "Land at a vertiport near your destination within minutes. What once took hours in traffic now takes a fraction of the time through electric aviation.",
+      "Land at a mobility hub near your destination within minutes. What once took hours in traffic now takes a fraction of the time through aerial mobility.",
     stat: "5x Faster",
     statLabel: "vs. Road Travel",
   },
@@ -276,8 +276,8 @@ const HowItWorksSection = () => {
         {/* Supporting text */}
         <ScrollReveal delay={0.15} className="flex justify-center mb-[120px]">
           <p className="font-body text-body-lg text-titanium text-center max-w-[680px] leading-[1.6]">
-            AIRAVATH simplifies urban air travel through a seamless process that
-            connects passengers to vertiports and electric aircraft within
+            AIRAVATH simplifies urban air mobility through a seamless process that
+            connects passengers to mobility hubs and electric aircraft within
             minutes.
           </p>
         </ScrollReveal>

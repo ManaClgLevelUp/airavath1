@@ -25,34 +25,26 @@ const HeroSection = () => {
     >
       {/* Background slideshow with parallax */}
       <motion.div className="absolute inset-0 z-0" style={{ y: backgroundY }}>
-        {/* Scene 1 — Skyline */}
         <img
           src={heroSkyline}
           alt="Modern city skyline at sunset"
           className="absolute inset-0 w-full h-full object-cover hero-slide-1"
         />
-        {/* Scene 2 — Liftoff */}
         <img
           src={heroLiftoff}
           alt="eVTOL aircraft lifting off from vertiport"
           className="absolute inset-0 w-full h-full object-cover hero-slide-2"
         />
-        {/* Scene 3 — Flight */}
         <img
           src={heroFlight}
           alt="eVTOL aircraft flying above city"
           className="absolute inset-0 w-full h-full object-cover hero-slide-3"
         />
-
-        {/* 40% dark overlay */}
         <div className="absolute inset-0 bg-background/40" />
-        {/* Bottom gradient for readability */}
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent" />
-        {/* Left side gradient for left-aligned text */}
         <div className="absolute inset-0 bg-gradient-to-r from-background/60 via-transparent to-transparent" />
       </motion.div>
 
-      {/* Particle / grid overlay */}
       <ParticleGrid />
 
       {/* Aircraft flyover effect */}
@@ -77,7 +69,7 @@ const HeroSection = () => {
             className="mb-4x"
           >
             <span className="font-sub text-body-sm text-primary tracking-wide-futuristic uppercase">
-              Urban Air Mobility
+              Urban Air Mobility Network
             </span>
           </motion.div>
 
@@ -88,7 +80,7 @@ const HeroSection = () => {
             transition={{ duration: 0.9, delay: 0.4, ease: "easeOut" }}
             className="font-heading font-semibold text-foreground tracking-futuristic leading-[1.1] mb-3x max-w-[680px] text-[42px] md:text-hero"
           >
-            The Future of Urban Air Travel
+            Urban Air Mobility Network
           </motion.h1>
 
           {/* Supporting text */}
@@ -98,9 +90,9 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.7 }}
             className="font-body text-body-lg text-titanium max-w-[520px] mb-4x leading-[1.6]"
           >
-            AIRAVATH is building the next generation of on-demand air mobility
-            through electric aircraft and smart vertiport infrastructure designed
-            for the world's fastest growing cities.
+            AIRAVATH operates on-demand aerial mobility services and vertiport hub
+            networks, connecting cities through fast, efficient, and sustainable
+            urban air transportation.
           </motion.p>
 
           {/* CTA */}
@@ -115,7 +107,7 @@ const HeroSection = () => {
               className="md:w-auto w-full"
               onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
             >
-              Join The Future
+              Get Connected
             </Button>
           </motion.div>
         </div>
@@ -134,7 +126,6 @@ const HeroSection = () => {
         <ChevronDown className="w-5 h-5 text-primary animate-scroll-bounce" />
       </motion.div>
 
-      {/* Bottom gradient fade */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent z-[6]" />
     </section>
   );
