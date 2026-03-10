@@ -49,13 +49,13 @@ const CountUp = ({ target, duration = 1200 }: CountUpProps) => {
 const stats = [
   {
     number: "120+",
-    description: "Average yearly time lost in traffic in major cities.",
+    description: "Average yearly hours lost in traffic across major cities.",
     suffix: " Hours",
   },
   {
-    number: "$1",
-    description: "Estimated economic cost of global traffic congestion.",
-    suffix: " Trillion",
+    number: "4.2",
+    description: "Billion urban commuters expected worldwide by 2030.",
+    suffix: " Billion",
   },
   {
     number: "70%",
@@ -81,24 +81,20 @@ const ProblemSection = () => {
       style={{ paddingTop: "160px", paddingBottom: "160px" }}
     >
       <div className="container-airavath">
-        {/* Heading */}
         <ScrollReveal delay={0.12} className="flex flex-col items-center text-center mb-3x">
           <h2 className="font-heading font-semibold text-section text-foreground tracking-futuristic max-w-[720px]">
             Cities Are Running Out of Time
           </h2>
         </ScrollReveal>
 
-        {/* Supporting text */}
         <ScrollReveal delay={0.2} className="flex justify-center mb-12x">
           <p className="font-body text-body-lg text-titanium text-center max-w-[640px] leading-[1.6]">
-            Urban transportation systems are reaching their limits. Traffic congestion wastes
-            billions of hours every year and slows economic productivity across major cities worldwide.
+            Urban congestion continues to grow across modern cities, slowing transportation
+            and reducing efficiency. Current road-based systems are reaching their limits.
           </p>
         </ScrollReveal>
 
-        {/* Split Visual Comparison */}
         <div className="relative grid grid-cols-1 md:grid-cols-2 gap-0 mb-12x">
-          {/* Left — Traffic */}
           <ScrollReveal direction="left" duration={0.7} className="relative">
             <motion.div
               className="relative h-[320px] md:h-[420px] overflow-hidden rounded-l-card md:rounded-l-card rounded-t-card md:rounded-tr-none"
@@ -118,7 +114,6 @@ const ProblemSection = () => {
             </motion.div>
           </ScrollReveal>
 
-          {/* Right — Sky */}
           <ScrollReveal direction="right" duration={0.7} className="relative">
             <motion.div
               className="relative h-[320px] md:h-[420px] overflow-hidden rounded-r-card md:rounded-r-card rounded-b-card md:rounded-bl-none"
@@ -138,11 +133,9 @@ const ProblemSection = () => {
             </motion.div>
           </ScrollReveal>
 
-          {/* Vertical divider */}
           <div className="hidden md:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-px h-[420px] bg-border z-10" />
         </div>
 
-        {/* Statistics Row */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6x">
           {stats.map((stat, i) => (
             <ScrollReveal key={i} delay={0.12 * i} className="text-center">

@@ -3,7 +3,6 @@ import { useInView } from "framer-motion";
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import ScrollReveal from "@/components/ScrollReveal";
 
-// Count-up hook
 const useCountUp = (target: string, duration = 1200) => {
   const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
@@ -30,8 +29,8 @@ const useCountUp = (target: string, duration = 1200) => {
 };
 
 const stats = [
-  { number: "$30B+", description: "Projected global eVTOL market value by 2030." },
-  { number: "200+", description: "Active electric aircraft development programs worldwide." },
+  { number: "$30B+", description: "Projected eVTOL market value by 2030." },
+  { number: "200+", description: "Active electric aircraft programs worldwide." },
   { number: "70%", description: "Projected urban population worldwide by 2050." },
   { number: "3×", description: "Expected increase in demand for urban air mobility services.", suffix: " Growth" },
 ];
@@ -105,7 +104,6 @@ const MarketOpportunitySection = () => {
         background: "linear-gradient(180deg, hsl(0 0% 0%) 0%, hsl(0 0% 1.2%) 100%)",
       }}
     >
-      {/* Background */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0 grid-overlay opacity-[0.05]" />
         <svg className="absolute inset-0 w-full h-full opacity-[0.06]" xmlns="http://www.w3.org/2000/svg">
@@ -116,7 +114,6 @@ const MarketOpportunitySection = () => {
               <stop offset="100%" stopColor="hsl(189,100%,50%)" stopOpacity="0" />
             </linearGradient>
           </defs>
-          {/* Simplified world map dots */}
           {Array.from({ length: 30 }).map((_, i) => (
             <circle
               key={i}
@@ -133,31 +130,27 @@ const MarketOpportunitySection = () => {
       </div>
 
       <div className="container-airavath relative z-10">
-        {/* Heading */}
         <ScrollReveal className="flex flex-col items-center text-center mb-3x">
           <h2 className="font-heading font-semibold text-section text-foreground tracking-futuristic">
-            A Massive Global Opportunity
+            A Massive Market Opportunity
           </h2>
         </ScrollReveal>
 
         <ScrollReveal delay={0.15} className="flex justify-center mb-[120px]">
           <p className="font-body text-body-lg text-titanium text-center max-w-[720px] leading-[1.6]">
-            Urban air mobility and electric aviation are expected to transform transportation across
-            major cities. Rapid urbanization, increasing congestion, and technological breakthroughs
-            are accelerating the development of aerial mobility networks worldwide.
+            Urban air mobility is expected to transform transportation across
+            major cities. Rapid urbanization, increasing congestion, and operational
+            breakthroughs are accelerating the growth of aerial mobility networks.
           </p>
         </ScrollReveal>
 
-        {/* Statistics Row */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4x mb-[120px]">
           {stats.map((stat, i) => (
             <StatCard key={i} stat={stat} delay={0.2 * i} />
           ))}
         </div>
 
-        {/* Charts */}
         <div ref={chartRef} className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-          {/* Line Chart */}
           <ScrollReveal delay={0.1}>
             <div className="bg-card border border-border rounded-card p-4x h-[320px]">
               <h3 className="font-sub text-feature text-foreground mb-4x">
@@ -166,8 +159,8 @@ const MarketOpportunitySection = () => {
               <ResponsiveContainer width="100%" height="85%">
                 <LineChart data={lineData}>
                   <CartesianGrid strokeDasharray="3 3" stroke="hsl(0,0%,11%)" />
-                  <XAxis dataKey="year" stroke="hsl(210,6%,77%)" fontSize={12} fontFamily="Inter" />
-                  <YAxis stroke="hsl(210,6%,77%)" fontSize={12} fontFamily="Inter" tickFormatter={(v) => `$${v}B`} />
+                  <XAxis dataKey="year" stroke="hsl(210,6%,77%)" fontSize={12} fontFamily="Poppins" />
+                  <YAxis stroke="hsl(210,6%,77%)" fontSize={12} fontFamily="Poppins" tickFormatter={(v) => `$${v}B`} />
                   <Tooltip content={<CustomTooltip />} />
                   {showCharts && (
                     <Line
@@ -187,7 +180,6 @@ const MarketOpportunitySection = () => {
             </div>
           </ScrollReveal>
 
-          {/* Bar Chart */}
           <ScrollReveal delay={0.25}>
             <div className="bg-card border border-border rounded-card p-4x h-[320px]">
               <h3 className="font-sub text-feature text-foreground mb-4x">
@@ -196,8 +188,8 @@ const MarketOpportunitySection = () => {
               <ResponsiveContainer width="100%" height="85%">
                 <BarChart data={barData}>
                   <CartesianGrid strokeDasharray="3 3" stroke="hsl(0,0%,11%)" />
-                  <XAxis dataKey="name" stroke="hsl(210,6%,77%)" fontSize={11} fontFamily="Inter" />
-                  <YAxis stroke="hsl(210,6%,77%)" fontSize={12} fontFamily="Inter" tickFormatter={(v) => `${v}%`} />
+                  <XAxis dataKey="name" stroke="hsl(210,6%,77%)" fontSize={11} fontFamily="Poppins" />
+                  <YAxis stroke="hsl(210,6%,77%)" fontSize={12} fontFamily="Poppins" tickFormatter={(v) => `${v}%`} />
                   <Tooltip content={<BarTooltip />} />
                   {showCharts && (
                     <Bar
