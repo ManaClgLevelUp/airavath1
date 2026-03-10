@@ -51,14 +51,23 @@ const Navbar = () => {
     return () => { document.body.style.overflow = ""; };
   }, [mobileOpen]);
 
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const handleNavClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     setMobileOpen(false);
-    const target = document.querySelector(href);
-    if (target) {
-      target.scrollIntoView({ behavior: "smooth" });
+    
+    if (location.pathname !== "/") {
+      // Navigate to homepage with hash
+      navigate("/" + href);
+    } else {
+      const target = document.querySelector(href);
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth" });
+      }
     }
-  }, []);
+  }, [location.pathname, navigate]);
 
   return (
     <>
