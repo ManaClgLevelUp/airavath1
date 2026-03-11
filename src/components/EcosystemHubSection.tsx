@@ -1,11 +1,13 @@
-import { Building2, Plane, Landmark, Network } from "lucide-react";
+import { Building2, Plane, Landmark, Network, ArrowRight } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const hubs = [
   {
     icon: Building2,
     title: "Ground Port",
+    link: "/ground-port",
     description:
       "Ground-level mobility hubs used for passenger access and service operations. These hubs serve as the primary entry point for urban air mobility, featuring premium passenger lounges, boarding areas, and ground transportation connections.",
     features: ["Street-level access", "Passenger lounges", "Ground transport integration", "Service operations center"],
@@ -13,6 +15,7 @@ const hubs = [
   {
     icon: Plane,
     title: "Vertiport",
+    link: "/vertiport",
     description:
       "Landing and takeoff areas located on elevated building platforms — typically on first floor or mid-building levels. Vertiports are designed for rapid turnaround operations and seamless integration with existing commercial buildings.",
     features: ["Mid-building platforms", "Rapid turnaround", "Commercial integration", "Charging infrastructure"],
@@ -20,6 +23,7 @@ const hubs = [
   {
     icon: Landmark,
     title: "Sky Port",
+    link: "/sky-port",
     description:
       "Landing infrastructure located on top of skyscrapers and high-rise buildings. Sky Ports provide the fastest access to aerial mobility from premium locations in city centers and business districts.",
     features: ["Rooftop landing pads", "Premium locations", "Express boarding", "Panoramic views"],
@@ -27,6 +31,7 @@ const hubs = [
   {
     icon: Network,
     title: "Hub Network",
+    link: "/hub-network",
     description:
       "Multiple hubs connected to form a city-wide mobility network. The hub network enables AIRAVATH to operate seamless aerial transportation across entire metropolitan areas, connecting Ground Ports, Vertiports, and Sky Ports into a unified system.",
     features: ["City-wide coverage", "Interconnected routes", "Fleet coordination", "Real-time scheduling"],
