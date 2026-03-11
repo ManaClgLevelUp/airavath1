@@ -113,17 +113,6 @@ const WebsiteSettings = () => {
           />
         </div>
 
-        {/* Section Visibility */}
-        <div>
-          <label className="text-sm text-[#888] mb-3 block">Section Visibility</label>
-          <div className="flex items-center justify-between p-4 rounded-lg border border-[#222] bg-[#0B0B0B]">
-            <span className="text-sm text-white">Show Team Section</span>
-            <Switch
-              checked={settings.show_team_section}
-              onCheckedChange={(checked) => setSettings((s) => ({ ...s, show_team_section: checked }))}
-            />
-          </div>
-        </div>
 
         <button
           onClick={handleSave}
