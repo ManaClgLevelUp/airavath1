@@ -1,14 +1,11 @@
 import { NavLink, Outlet, Navigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { LayoutDashboard, Settings, Users, Mail, LogOut, Newspaper, Briefcase, FileText } from "lucide-react";
-import { useEffect, useState } from "react";
-import { doc, onSnapshot, setDoc, getDoc } from "firebase/firestore";
-import { db } from "@/lib/firebase";
 
 const links = [
   { to: "/admin", icon: LayoutDashboard, label: "Dashboard", end: true },
   { to: "/admin/settings", icon: Settings, label: "Website Settings", end: false },
-  { to: "/admin/team", icon: Users, label: "Team Members", end: false, hasToggle: true },
+  { to: "/admin/team", icon: Users, label: "Team Members", end: false },
   { to: "/admin/inquiries", icon: Mail, label: "Inquiries", end: false },
   { to: "/admin/newsroom", icon: Newspaper, label: "Newsroom", end: false },
   { to: "/admin/careers", icon: Briefcase, label: "Careers", end: false },
@@ -17,27 +14,6 @@ const links = [
 
 const AdminLayout = () => {
   const { user, isAdmin, loading, logout } = useAuth();
-  const [showTeam, setShowTeam] = useState(true);
-
-  useEffect(() => {
-    const unsub = onSnapshot(doc(db, "website_settings", "main"), (snap) => {
-      if (snap.exists()) {
-        setShowTeam(snap.data().show_team_section !== false);
-      }
-    });
-    return unsub;
-  }, []);
-
-  const handleToggleTeam = async (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    const newVal = !showTeam;
-    setShowTeam(newVal);
-    const ref = doc(db, "website_settings", "main");
-    const snap = await getDoc(ref);
-    const existing = snap.exists() ? snap.data() : {};
-    await setDoc(ref, { ...existing, show_team_section: newVal });
-  };
 
   if (loading) return <div className="min-h-screen bg-black" />;
   if (!user || !isAdmin) return <Navigate to="/admin/login" replace />;
@@ -51,35 +27,21 @@ const AdminLayout = () => {
         </div>
         <nav className="flex-1 py-4 space-y-1 px-3">
           {links.map((l) => (
-            <div key={l.to} className="flex items-center gap-1">
-              <NavLink
-                to={l.to}
-                end={l.end}
-                className={({ isActive }) =>
-                  `flex-1 flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-                    isActive
-                      ? "bg-[#00D9FF]/10 text-[#00D9FF]"
-                      : "text-[#888] hover:text-white hover:bg-white/5"
-                  }`
-                }
-              >
-                <l.icon size={18} />
-                {l.label}
-              </NavLink>
-              {l.hasToggle && (
-                <button
-                  onClick={handleToggleTeam}
-                  title={showTeam ? "Team section visible" : "Team section hidden"}
-                  className="flex-shrink-0 p-1.5 rounded-md hover:bg-white/5 transition-colors"
-                >
-                  <div
-                    className={`w-3 h-3 rounded-full transition-colors ${
-                      showTeam ? "bg-green-500 shadow-[0_0_6px_rgba(34,197,94,0.5)]" : "bg-red-500 shadow-[0_0_6px_rgba(239,68,68,0.5)]"
-                    }`}
-                  />
-                </button>
-              )}
-            </div>
+            <NavLink
+              key={l.to}
+              to={l.to}
+              end={l.end}
+              className={({ isActive }) =>
+                `flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                  isActive
+                    ? "bg-[#00D9FF]/10 text-[#00D9FF]"
+                    : "text-[#888] hover:text-white hover:bg-white/5"
+                }`
+              }
+            >
+              <l.icon size={18} />
+              {l.label}
+            </NavLink>
           ))}
         </nav>
         <div className="p-3 border-t border-[#1a1a1a]">
