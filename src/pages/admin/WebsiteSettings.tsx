@@ -4,12 +4,14 @@ import { db } from "@/lib/firebase";
 import { uploadToCloudinary } from "@/lib/cloudinary";
 import { useToast } from "@/hooks/use-toast";
 import { Upload, Loader2 } from "lucide-react";
+import { Switch } from "@/components/ui/switch";
 
 interface SiteSettings {
   logo_url: string;
   linkedin_url: string;
   twitter_url: string;
   youtube_url: string;
+  show_team_section: boolean;
 }
 
 const defaults: SiteSettings = {
@@ -17,6 +19,7 @@ const defaults: SiteSettings = {
   linkedin_url: "",
   twitter_url: "",
   youtube_url: "",
+  show_team_section: true,
 };
 
 const WebsiteSettings = () => {
