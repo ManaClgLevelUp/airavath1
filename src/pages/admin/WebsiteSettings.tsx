@@ -18,7 +18,6 @@ const defaults: SiteSettings = {
   linkedin_url: "",
   twitter_url: "",
   youtube_url: "",
-  show_team_section: true,
 };
 
 const WebsiteSettings = () => {
