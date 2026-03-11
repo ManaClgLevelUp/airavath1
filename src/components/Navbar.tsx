@@ -22,7 +22,19 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [showTeam, setShowTeam] = useState(true);
   const lastScrollY = useRef(0);
+
+  useEffect(() => {
+    const unsub = onSnapshot(doc(db, "website_settings", "main"), (snap) => {
+      if (snap.exists()) {
+        setShowTeam(snap.data().show_team_section !== false);
+      }
+    });
+    return unsub;
+  }, []);
+
+  const navLinks = allNavLinks.filter((link) => showTeam || link.label !== "Team");
   const ticking = useRef(false);
 
   useEffect(() => {
