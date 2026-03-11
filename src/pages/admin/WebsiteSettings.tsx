@@ -4,14 +4,12 @@ import { db } from "@/lib/firebase";
 import { uploadToCloudinary } from "@/lib/cloudinary";
 import { useToast } from "@/hooks/use-toast";
 import { Upload, Loader2 } from "lucide-react";
-import { Switch } from "@/components/ui/switch";
 
 interface SiteSettings {
   logo_url: string;
   linkedin_url: string;
   twitter_url: string;
   youtube_url: string;
-  show_team_section: boolean;
 }
 
 const defaults: SiteSettings = {
@@ -19,7 +17,6 @@ const defaults: SiteSettings = {
   linkedin_url: "",
   twitter_url: "",
   youtube_url: "",
-  show_team_section: true,
 };
 
 const WebsiteSettings = () => {
@@ -31,7 +28,15 @@ const WebsiteSettings = () => {
   useEffect(() => {
     const load = async () => {
       const snap = await getDoc(doc(db, "website_settings", "main"));
-      if (snap.exists()) setSettings(snap.data() as SiteSettings);
+      if (snap.exists()) {
+        const data = snap.data();
+        setSettings({
+          logo_url: data.logo_url || "",
+          linkedin_url: data.linkedin_url || "",
+          twitter_url: data.twitter_url || "",
+          youtube_url: data.youtube_url || "",
+        });
+      }
     };
     load();
   }, []);
@@ -54,7 +59,7 @@ const WebsiteSettings = () => {
   const handleSave = async () => {
     setSaving(true);
     try {
-      await setDoc(doc(db, "website_settings", "main"), settings);
+      await setDoc(doc(db, "website_settings", "main"), settings, { merge: true });
       toast({ title: "Settings saved" });
     } catch {
       toast({ title: "Save failed", variant: "destructive" });
@@ -113,18 +118,6 @@ const WebsiteSettings = () => {
             placeholder="https://youtube.com/..."
             className={inputClass}
           />
-        </div>
-
-        {/* Section Visibility */}
-        <div>
-          <label className="text-sm text-[#888] mb-3 block">Section Visibility</label>
-          <div className="flex items-center justify-between p-4 rounded-lg border border-[#222] bg-[#0B0B0B]">
-            <span className="text-sm text-white">Show Team Section</span>
-            <Switch
-              checked={settings.show_team_section}
-              onCheckedChange={(checked) => setSettings((s) => ({ ...s, show_team_section: checked }))}
-            />
-          </div>
         </div>
 
         <button

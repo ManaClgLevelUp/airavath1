@@ -3,9 +3,11 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { doc, onSnapshot } from "firebase/firestore";
+import { db } from "@/lib/firebase";
 import airavathLogo from "@/assets/airavath-logo.png";
 
-const navLinks = [
+const allNavLinks = [
   { label: "Home", href: "#home" },
   { label: "Technology", href: "#technology" },
   { label: "Vision", href: "#vision" },
@@ -20,7 +22,19 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [showTeam, setShowTeam] = useState(true);
   const lastScrollY = useRef(0);
+
+  useEffect(() => {
+    const unsub = onSnapshot(doc(db, "website_settings", "main"), (snap) => {
+      if (snap.exists()) {
+        setShowTeam(snap.data().show_team_section !== false);
+      }
+    });
+    return unsub;
+  }, []);
+
+  const navLinks = allNavLinks.filter((link) => showTeam || link.label !== "Team");
   const ticking = useRef(false);
 
   useEffect(() => {
