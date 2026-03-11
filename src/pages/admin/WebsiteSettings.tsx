@@ -11,7 +11,6 @@ interface SiteSettings {
   linkedin_url: string;
   twitter_url: string;
   youtube_url: string;
-  show_team_section: boolean;
 }
 
 const defaults: SiteSettings = {
