@@ -1,14 +1,11 @@
 import { NavLink, Outlet, Navigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { LayoutDashboard, Settings, Users, Mail, LogOut, Newspaper, Briefcase, FileText } from "lucide-react";
-import { useEffect, useState } from "react";
-import { doc, onSnapshot, updateDoc } from "firebase/firestore";
-import { db } from "@/lib/firebase";
 
 const links = [
   { to: "/admin", icon: LayoutDashboard, label: "Dashboard", end: true },
   { to: "/admin/settings", icon: Settings, label: "Website Settings", end: false },
-  { to: "/admin/team", icon: Users, label: "Team Members", end: false, toggleKey: "show_team_section" as const },
+  { to: "/admin/team", icon: Users, label: "Team Members", end: false },
   { to: "/admin/inquiries", icon: Mail, label: "Inquiries", end: false },
   { to: "/admin/newsroom", icon: Newspaper, label: "Newsroom", end: false },
   { to: "/admin/careers", icon: Briefcase, label: "Careers", end: false },
@@ -17,31 +14,6 @@ const links = [
 
 const AdminLayout = () => {
   const { user, isAdmin, loading, logout } = useAuth();
-  const [showTeam, setShowTeam] = useState(true);
-
-  useEffect(() => {
-    const unsub = onSnapshot(doc(db, "site_settings", "general"), (snap) => {
-      if (snap.exists()) {
-        const data = snap.data();
-        if (typeof data.show_team_section === "boolean") {
-          setShowTeam(data.show_team_section);
-        }
-      }
-    });
-    return unsub;
-  }, []);
-
-  const handleToggleTeam = async (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    const newVal = !showTeam;
-    setShowTeam(newVal);
-    try {
-      await updateDoc(doc(db, "site_settings", "general"), { show_team_section: newVal });
-    } catch {
-      setShowTeam(!newVal);
-    }
-  };
 
   if (loading) return <div className="min-h-screen bg-black" />;
   if (!user || !isAdmin) return <Navigate to="/admin/login" replace />;
@@ -55,39 +27,21 @@ const AdminLayout = () => {
         </div>
         <nav className="flex-1 py-4 space-y-1 px-3">
           {links.map((l) => (
-            <div key={l.to} className="flex items-center">
-              <NavLink
-                to={l.to}
-                end={l.end}
-                className={({ isActive }) =>
-                  `flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors flex-1 ${
-                    isActive
-                      ? "bg-[#00D9FF]/10 text-[#00D9FF]"
-                      : "text-[#888] hover:text-white hover:bg-white/5"
-                  }`
-                }
-              >
-                <l.icon size={18} />
-                {l.label}
-              </NavLink>
-              {l.toggleKey && (
-                <button
-                  onClick={handleToggleTeam}
-                  className="ml-1 flex items-center gap-1 px-2 py-1 rounded text-[10px] font-semibold uppercase tracking-wide transition-colors shrink-0"
-                  style={{
-                    background: showTeam ? "rgba(34,197,94,0.15)" : "rgba(239,68,68,0.15)",
-                    color: showTeam ? "#22c55e" : "#ef4444",
-                  }}
-                  title={showTeam ? "Team section is visible" : "Team section is hidden"}
-                >
-                  <span
-                    className="w-2 h-2 rounded-full"
-                    style={{ background: showTeam ? "#22c55e" : "#ef4444" }}
-                  />
-                  {showTeam ? "On" : "Off"}
-                </button>
-              )}
-            </div>
+            <NavLink
+              key={l.to}
+              to={l.to}
+              end={l.end}
+              className={({ isActive }) =>
+                `flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                  isActive
+                    ? "bg-[#00D9FF]/10 text-[#00D9FF]"
+                    : "text-[#888] hover:text-white hover:bg-white/5"
+                }`
+              }
+            >
+              <l.icon size={18} />
+              {l.label}
+            </NavLink>
           ))}
         </nav>
         <div className="p-3 border-t border-[#1a1a1a]">
