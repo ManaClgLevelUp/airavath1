@@ -87,7 +87,7 @@ const EcosystemHubSection = () => {
                     </p>
                   </div>
                 </div>
-                <div className="grid grid-cols-2 gap-3 ml-[74px]">
+                <div className="grid grid-cols-2 gap-3 ml-[74px] mb-6">
                   {hub.features.map((feature) => (
                     <div
                       key={feature}
@@ -97,6 +97,14 @@ const EcosystemHubSection = () => {
                       <span>{feature}</span>
                     </div>
                   ))}
+                </div>
+                <div className="ml-[74px]">
+                  <Link
+                    to={hub.link}
+                    className="inline-flex items-center gap-2 font-body text-[14px] text-primary hover:text-foreground transition-colors group/link"
+                  >
+                    Learn More <ArrowRight size={14} className="group-hover/link:translate-x-1 transition-transform" />
+                  </Link>
                 </div>
               </motion.div>
             </ScrollReveal>
