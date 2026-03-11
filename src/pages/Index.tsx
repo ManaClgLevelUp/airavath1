@@ -1,5 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { doc, onSnapshot } from "firebase/firestore";
+import { db } from "@/lib/firebase";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
@@ -22,6 +24,17 @@ import FooterSection from "@/components/FooterSection";
 
 const Index = () => {
   const location = useLocation();
+  const [showTeam, setShowTeam] = useState(true);
+
+  useEffect(() => {
+    const unsub = onSnapshot(doc(db, "website_settings", "main"), (snap) => {
+      if (snap.exists()) {
+        const data = snap.data();
+        setShowTeam(data.show_team_section !== false);
+      }
+    });
+    return unsub;
+  }, []);
 
   useEffect(() => {
     if (location.hash) {
@@ -31,6 +44,7 @@ const Index = () => {
       }, 100);
     }
   }, [location]);
+
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
       <Navbar />
@@ -49,7 +63,7 @@ const Index = () => {
       <MarketOpportunitySection />
       <FeaturesSection />
       <VisionSection />
-      <TeamSection />
+      {showTeam && <TeamSection />}
       <ContactSection />
       <FooterSection />
     </div>
