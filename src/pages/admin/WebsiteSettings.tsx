@@ -4,7 +4,7 @@ import { db } from "@/lib/firebase";
 import { uploadToCloudinary } from "@/lib/cloudinary";
 import { useToast } from "@/hooks/use-toast";
 import { Upload, Loader2 } from "lucide-react";
-import { Switch } from "@/components/ui/switch";
+
 
 interface SiteSettings {
   logo_url: string;
