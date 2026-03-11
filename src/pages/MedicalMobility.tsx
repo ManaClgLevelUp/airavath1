@@ -49,6 +49,7 @@ const features = [
 ];
 
 const MedicalMobility = () => {
+  useEffect(() => { window.scrollTo(0, 0); }, []);
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Navbar />
