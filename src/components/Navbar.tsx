@@ -3,9 +3,11 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { doc, onSnapshot } from "firebase/firestore";
+import { db } from "@/lib/firebase";
 import airavathLogo from "@/assets/airavath-logo.png";
 
-const navLinks = [
+const allNavLinks = [
   { label: "Home", href: "#home" },
   { label: "Technology", href: "#technology" },
   { label: "Vision", href: "#vision" },
