@@ -22,6 +22,10 @@ import JobDetail from "./pages/JobDetail";
 import MedicalMobility from "./pages/MedicalMobility";
 import CargoLogistics from "./pages/CargoLogistics";
 import TourismMobility from "./pages/TourismMobility";
+import GroundPort from "./pages/GroundPort";
+import VertiportPage from "./pages/Vertiport";
+import SkyPort from "./pages/SkyPort";
+import HubNetwork from "./pages/HubNetwork";
 
 const queryClient = new QueryClient();
 
@@ -37,6 +41,10 @@ const App = () => (
             <Route path="/medical-mobility" element={<MedicalMobility />} />
             <Route path="/cargo-logistics" element={<CargoLogistics />} />
             <Route path="/tourism-mobility" element={<TourismMobility />} />
+            <Route path="/ground-port" element={<GroundPort />} />
+            <Route path="/vertiport" element={<VertiportPage />} />
+            <Route path="/sky-port" element={<SkyPort />} />
+            <Route path="/hub-network" element={<HubNetwork />} />
             <Route path="/newsroom" element={<Newsroom />} />
             <Route path="/newsroom/:id" element={<NewsArticle />} />
             <Route path="/careers" element={<Careers />} />
