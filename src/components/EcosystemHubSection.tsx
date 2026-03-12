@@ -2,39 +2,43 @@ import { Building2, Plane, Landmark, Network, ArrowRight } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import cardGroundport from "@/assets/card-groundport.jpg";
+import cardVertiport from "@/assets/card-vertiport.jpg";
+import cardSkyport from "@/assets/card-skyport.jpg";
+import cardHubnetwork from "@/assets/card-hubnetwork.jpg";
 
 const hubs = [
   {
     icon: Building2,
     title: "Ground Port",
     link: "/ground-port",
+    image: cardGroundport,
     description:
-      "Ground-level mobility hubs used for passenger access and service operations. These hubs serve as the primary entry point for urban air mobility, featuring premium passenger lounges, boarding areas, and ground transportation connections.",
-    features: ["Street-level access", "Passenger lounges", "Ground transport integration", "Service operations center"],
+      "Ground-level mobility hubs used for passenger access and service operations. These hubs serve as the primary entry point for urban air mobility.",
   },
   {
     icon: Plane,
     title: "Vertiport",
     link: "/vertiport",
+    image: cardVertiport,
     description:
-      "Landing and takeoff areas located on elevated building platforms — typically on first floor or mid-building levels. Vertiports are designed for rapid turnaround operations and seamless integration with existing commercial buildings.",
-    features: ["Mid-building platforms", "Rapid turnaround", "Commercial integration", "Charging infrastructure"],
+      "Landing and takeoff areas located on elevated building platforms — typically on first floor or mid-building levels for rapid turnaround operations.",
   },
   {
     icon: Landmark,
     title: "Sky Port",
     link: "/sky-port",
+    image: cardSkyport,
     description:
-      "Landing infrastructure located on top of skyscrapers and high-rise buildings. Sky Ports provide the fastest access to aerial mobility from premium locations in city centers and business districts.",
-    features: ["Rooftop landing pads", "Premium locations", "Express boarding", "Panoramic views"],
+      "Landing infrastructure located on top of skyscrapers and high-rise buildings. Premium access to aerial mobility from the city's highest points.",
   },
   {
     icon: Network,
     title: "Hub Network",
     link: "/hub-network",
+    image: cardHubnetwork,
     description:
-      "Multiple hubs connected to form a city-wide mobility network. The hub network enables AIRAVATH to operate seamless aerial transportation across entire metropolitan areas, connecting Ground Ports, Vertiports, and Sky Ports into a unified system.",
-    features: ["City-wide coverage", "Interconnected routes", "Fleet coordination", "Real-time scheduling"],
+      "Multiple hubs connected to form a city-wide mobility network, enabling seamless aerial transportation across entire metropolitan areas.",
   },
 ];
 
@@ -62,8 +66,7 @@ const EcosystemHubSection = () => {
         <ScrollReveal delay={0.15} className="flex justify-center mb-[100px]">
           <p className="font-body text-body-lg text-titanium text-center max-w-[720px] leading-[1.6]">
             AIRAVATH operates a multi-tier hub infrastructure that forms the backbone of the
-            urban air mobility network. Each hub type serves a specific role in the ecosystem,
-            together creating a comprehensive city-wide aerial transportation system.
+            urban air mobility network. Each hub type serves a specific role in the ecosystem.
           </p>
         </ScrollReveal>
 
@@ -71,34 +74,30 @@ const EcosystemHubSection = () => {
           {hubs.map((hub, i) => (
             <ScrollReveal key={hub.title} delay={0.15 * i}>
               <motion.div
-                className="group bg-card border border-border rounded-card p-8 md:p-10 h-full hover:border-primary/30 hover:shadow-[0_0_30px_hsl(189_100%_50%/0.1)] transition-all duration-500"
+                className="group bg-card border border-border rounded-[12px] overflow-hidden h-full hover:border-primary/30 hover:shadow-[0_0_30px_hsl(189_100%_50%/0.1)] transition-all duration-500"
                 whileHover={{ y: -4 }}
               >
-                <div className="flex items-start gap-5 mb-6">
-                  <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
-                    <hub.icon className="w-7 h-7 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="font-sub text-[24px] font-medium text-foreground mb-2">
-                      {hub.title}
-                    </h3>
-                    <p className="font-body text-[16px] text-titanium leading-[1.7]">
-                      {hub.description}
-                    </p>
+                {/* Card Image */}
+                <div className="relative h-[180px] overflow-hidden">
+                  <img
+                    src={hub.image}
+                    alt={hub.title}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-card via-card/30 to-transparent" />
+                  <div className="absolute top-4 left-4 w-10 h-10 rounded-lg bg-primary/20 backdrop-blur-sm flex items-center justify-center">
+                    <hub.icon className="w-5 h-5 text-primary" />
                   </div>
                 </div>
-                <div className="grid grid-cols-2 gap-3 ml-[74px] mb-6">
-                  {hub.features.map((feature) => (
-                    <div
-                      key={feature}
-                      className="flex items-center gap-2 font-body text-[14px] text-titanium/80"
-                    >
-                      <div className="w-1.5 h-1.5 rounded-full bg-primary/50" />
-                      <span>{feature}</span>
-                    </div>
-                  ))}
-                </div>
-                <div className="ml-[74px]">
+
+                {/* Card Content */}
+                <div className="p-8">
+                  <h3 className="font-sub text-[24px] font-medium text-foreground mb-3">
+                    {hub.title}
+                  </h3>
+                  <p className="font-body text-[15px] text-titanium leading-[1.7] mb-6">
+                    {hub.description}
+                  </p>
                   <Link
                     to={hub.link}
                     className="inline-flex items-center gap-2 font-body text-[14px] text-primary hover:text-foreground transition-colors group/link"
