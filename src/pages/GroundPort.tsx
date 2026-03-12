@@ -1,67 +1,46 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import FooterSection from "@/components/FooterSection";
 import ScrollReveal from "@/components/ScrollReveal";
-import { Building2, Users, TrainFront, ShieldCheck, Zap, Clock, ArrowLeft, ChevronRight } from "lucide-react";
+import { Building2, Users, TrainFront, ShieldCheck, Zap, Clock, ArrowLeft, ChevronRight, Play, CheckCircle2 } from "lucide-react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
-import heroImg from "@/assets/hub-groundport.jpg";
+import { motion, useScroll, useTransform } from "framer-motion";
+import heroImg from "@/assets/card-groundport.jpg";
 import vertiportNetwork from "@/assets/vertiport-network.jpg";
+import gallery1 from "@/assets/gallery-groundport-1.jpg";
+import gallery2 from "@/assets/gallery-groundport-2.jpg";
+import hubGroundport from "@/assets/hub-groundport.jpg";
 
 const steps = [
-  {
-    number: "01",
-    title: "Arrival & Check-In",
-    description: "Passengers arrive at the street-level Ground Port via metro, taxi, or private vehicle. Automated kiosks and digital ID verification ensure seamless check-in within 60 seconds.",
-  },
-  {
-    number: "02",
-    title: "Security & Boarding",
-    description: "Quick biometric security screening followed by entry into the premium departure lounge. Real-time flight status displays keep passengers informed.",
-  },
-  {
-    number: "03",
-    title: "Ground-to-Air Transfer",
-    description: "Passengers are guided to the vertical lift platform where the eVTOL aircraft is prepped and ready. Boarding takes under 2 minutes.",
-  },
-  {
-    number: "04",
-    title: "Takeoff & Transit",
-    description: "The aircraft lifts off vertically from the Ground Port pad, ascending to cruise altitude and connecting to the nearest Vertiport or Sky Port at the destination.",
-  },
+  { number: "01", title: "Arrival & Check-In", description: "Passengers arrive at the street-level Ground Port via metro, taxi, or private vehicle. Automated kiosks and digital ID verification ensure seamless check-in within 60 seconds.", icon: "🚶" },
+  { number: "02", title: "Security & Boarding", description: "Quick biometric security screening followed by entry into the premium departure lounge. Real-time flight status displays keep passengers informed.", icon: "🔐" },
+  { number: "03", title: "Ground-to-Air Transfer", description: "Passengers are guided to the vertical lift platform where the eVTOL aircraft is prepped and ready. Boarding takes under 2 minutes.", icon: "🛫" },
+  { number: "04", title: "Takeoff & Transit", description: "The aircraft lifts off vertically from the Ground Port pad, ascending to cruise altitude and connecting to the nearest hub at the destination.", icon: "✈️" },
 ];
 
 const features = [
-  {
-    icon: Building2,
-    title: "Street-Level Access",
-    description: "Located at ground level for maximum accessibility — no elevators or rooftop access needed. Integrated with sidewalks, transit stops, and parking.",
-  },
-  {
-    icon: Users,
-    title: "Premium Passenger Lounges",
-    description: "Climate-controlled waiting areas with comfortable seating, refreshments, Wi-Fi, and real-time flight tracking displays.",
-  },
-  {
-    icon: TrainFront,
-    title: "Multi-Modal Integration",
-    description: "Seamlessly connected to metro stations, bus stops, ride-hailing drop-offs, and bicycle docking stations for first/last mile connectivity.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Automated Security",
-    description: "AI-powered biometric screening and baggage checks that reduce wait times to under 90 seconds while maintaining the highest safety standards.",
-  },
-  {
-    icon: Zap,
-    title: "Rapid Charging Bays",
-    description: "High-speed charging infrastructure for eVTOL aircraft, enabling fast turnaround between flights and maximizing fleet utilization.",
-  },
-  {
-    icon: Clock,
-    title: "24/7 Operations Center",
-    description: "On-site command center monitoring all Ground Port operations, coordinating with the city-wide hub network in real time.",
-  },
+  { icon: Building2, title: "Street-Level Access", description: "Located at ground level for maximum accessibility — no elevators or rooftop access needed." },
+  { icon: Users, title: "Premium Passenger Lounges", description: "Climate-controlled waiting areas with comfortable seating, refreshments, Wi-Fi, and real-time flight tracking." },
+  { icon: TrainFront, title: "Multi-Modal Integration", description: "Seamlessly connected to metro stations, bus stops, ride-hailing drop-offs, and bicycle docking stations." },
+  { icon: ShieldCheck, title: "Automated Security", description: "AI-powered biometric screening and baggage checks that reduce wait times to under 90 seconds." },
+  { icon: Zap, title: "Rapid Charging Bays", description: "High-speed 350kW charging infrastructure for eVTOL aircraft, enabling fast turnaround between flights." },
+  { icon: Clock, title: "24/7 Operations Center", description: "On-site command center monitoring all Ground Port operations, coordinating with the city-wide hub network." },
+];
+
+const benefits = [
+  "Maximum passenger accessibility at street level",
+  "Seamless ground transportation integration",
+  "Premium waiting lounges with real-time updates",
+  "Biometric security in under 90 seconds",
+  "Multi-modal first/last mile connectivity",
+  "Integrated EV charging infrastructure",
+];
+
+const galleryImages = [
+  { src: heroImg, alt: "Ground Port Terminal Exterior" },
+  { src: gallery1, alt: "Ground Port Passenger Lounge" },
+  { src: gallery2, alt: "eVTOL Charging Station" },
+  { src: hubGroundport, alt: "Ground Port Aerial View" },
 ];
 
 const specs = [
@@ -75,53 +54,57 @@ const specs = [
 
 const GroundPort = () => {
   useEffect(() => { window.scrollTo(0, 0); }, []);
+  const [hoveredGallery, setHoveredGallery] = useState<number | null>(null);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Navbar />
 
-      {/* Hero */}
-      <section className="relative min-h-[70vh] flex items-center overflow-hidden">
+      {/* Hero with video-style overlay */}
+      <section className="relative min-h-[85vh] flex items-center overflow-hidden">
         <div className="absolute inset-0">
-          <img src={heroImg} alt="AIRAVATH Ground Port terminal" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-background/60" />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent" />
+          <img src={heroImg} alt="AIRAVATH Ground Port terminal" className="w-full h-full object-cover scale-105" />
+          <div className="absolute inset-0 bg-background/70" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-background/60 to-transparent" />
         </div>
-        <div className="relative z-10 container-airavath pt-32 pb-16">
+        <div className="relative z-10 container-airavath pt-32 pb-20">
           <Link to="/#ecosystem" className="inline-flex items-center gap-2 font-body text-body-sm text-primary mb-8 hover:text-foreground transition-colors">
             <ArrowLeft size={16} /> Back to Hub Infrastructure
           </Link>
           <ScrollReveal>
-            <h1 className="font-heading text-[40px] md:text-[64px] font-semibold text-foreground tracking-futuristic mb-6">
+            <span className="font-heading text-[12px] tracking-[6px] text-primary uppercase mb-4 block">Ground-Level Mobility Hub</span>
+            <h1 className="font-heading text-[48px] md:text-[72px] font-semibold text-foreground tracking-futuristic mb-6 leading-[1.1]">
               Ground Port
             </h1>
           </ScrollReveal>
           <ScrollReveal delay={0.15}>
-            <p className="font-body text-body-lg text-titanium max-w-[640px] leading-[1.6]">
+            <p className="font-body text-[18px] md:text-[20px] text-titanium max-w-[600px] leading-[1.7]">
               Street-level mobility terminals that serve as the primary gateway to AIRAVATH's urban air mobility network — designed for maximum accessibility and seamless multi-modal integration.
             </p>
           </ScrollReveal>
         </div>
       </section>
 
-      {/* Overview with image */}
+      {/* Concept Overview */}
       <section className="section-padding">
         <div className="container-airavath">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <ScrollReveal>
-              <div className="relative rounded-card overflow-hidden">
-                <img src={vertiportNetwork} alt="Ground Port concept" className="w-full h-[400px] object-cover" />
+              <div className="relative rounded-[12px] overflow-hidden">
+                <img src={vertiportNetwork} alt="Ground Port concept" className="w-full h-[420px] object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/50 to-transparent" />
               </div>
             </ScrollReveal>
             <ScrollReveal delay={0.15}>
+              <span className="font-heading text-[12px] tracking-[4px] text-primary uppercase mb-4 block">Concept Overview</span>
               <h2 className="font-heading text-[32px] md:text-[40px] font-semibold text-foreground tracking-futuristic mb-6">
                 The Foundation of Urban Air Mobility
               </h2>
-              <p className="font-body text-[18px] text-titanium leading-[1.7] mb-6">
+              <p className="font-body text-[17px] text-titanium leading-[1.7] mb-6">
                 Ground Ports are the entry-level infrastructure of the AIRAVATH ecosystem. Positioned at street level in key urban locations, they eliminate the need for rooftop or elevated access — making aerial mobility as easy as catching a bus.
               </p>
-              <p className="font-body text-[18px] text-titanium leading-[1.7]">
+              <p className="font-body text-[17px] text-titanium leading-[1.7]">
                 Each Ground Port integrates with existing public transit, ride-hailing services, and pedestrian networks, creating a true multi-modal transportation hub that bridges ground and air.
               </p>
             </ScrollReveal>
@@ -129,10 +112,47 @@ const GroundPort = () => {
         </div>
       </section>
 
-      {/* Process Flow */}
+      {/* Visual Gallery */}
       <section className="section-padding" style={{ background: "linear-gradient(180deg, hsl(0 0% 0%) 0%, hsl(0 0% 2%) 100%)" }}>
         <div className="container-airavath">
+          <ScrollReveal className="text-center mb-[60px]">
+            <span className="font-heading text-[12px] tracking-[4px] text-primary uppercase mb-4 block">Visual Gallery</span>
+            <h2 className="font-heading text-[32px] md:text-[40px] font-semibold text-foreground tracking-futuristic">
+              Ground Port Concepts
+            </h2>
+          </ScrollReveal>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {galleryImages.map((img, i) => (
+              <ScrollReveal key={i} delay={0.1 * i}>
+                <motion.div
+                  className="relative rounded-[12px] overflow-hidden cursor-pointer aspect-[4/3]"
+                  onHoverStart={() => setHoveredGallery(i)}
+                  onHoverEnd={() => setHoveredGallery(null)}
+                  whileHover={{ scale: 1.03 }}
+                  transition={{ duration: 0.4 }}
+                >
+                  <img src={img.src} alt={img.alt} className="w-full h-full object-cover" />
+                  <motion.div
+                    className="absolute inset-0 bg-primary/20"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: hoveredGallery === i ? 1 : 0 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                  <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-background/80 to-transparent">
+                    <p className="font-body text-[12px] text-foreground/80">{img.alt}</p>
+                  </div>
+                </motion.div>
+              </ScrollReveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Animated Operational Flow */}
+      <section className="section-padding">
+        <div className="container-airavath">
           <ScrollReveal className="text-center mb-[80px]">
+            <span className="font-heading text-[12px] tracking-[4px] text-primary uppercase mb-4 block">Operational Flow</span>
             <h2 className="font-heading text-[32px] md:text-[40px] font-semibold text-foreground tracking-futuristic mb-4">
               How It Works
             </h2>
@@ -141,26 +161,70 @@ const GroundPort = () => {
             </p>
           </ScrollReveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {steps.map((step, i) => (
-              <ScrollReveal key={step.number} delay={0.15 * i}>
+          {/* Animated flow line */}
+          <div className="relative">
+            <div className="hidden lg:block absolute top-[60px] left-0 right-0 h-[2px]">
+              <motion.div
+                className="h-full bg-gradient-to-r from-transparent via-primary to-transparent"
+                initial={{ scaleX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                transition={{ duration: 1.2, ease: "easeOut" }}
+                viewport={{ once: true }}
+              />
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {steps.map((step, i) => (
+                <ScrollReveal key={step.number} delay={0.2 * i}>
+                  <motion.div
+                    className="bg-card border border-border rounded-[12px] p-8 h-full relative overflow-hidden group hover:border-primary/30 transition-all duration-500"
+                    whileHover={{ y: -4 }}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.2 * i, ease: "easeOut" }}
+                    viewport={{ once: true }}
+                  >
+                    <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-primary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <div className="text-[32px] mb-4">{step.icon}</div>
+                    <span className="font-heading text-[12px] tracking-[4px] text-primary/60 uppercase mb-3 block">Step {step.number}</span>
+                    <h3 className="font-sub text-[20px] text-foreground font-medium mb-3">{step.title}</h3>
+                    <p className="font-body text-[15px] text-titanium leading-[1.7]">{step.description}</p>
+                  </motion.div>
+                </ScrollReveal>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Video Section */}
+      <section className="section-padding" style={{ background: "linear-gradient(180deg, hsl(0 0% 2%) 0%, hsl(0 0% 0%) 100%)" }}>
+        <div className="container-airavath">
+          <ScrollReveal className="text-center mb-[60px]">
+            <span className="font-heading text-[12px] tracking-[4px] text-primary uppercase mb-4 block">Video Demonstration</span>
+            <h2 className="font-heading text-[32px] md:text-[40px] font-semibold text-foreground tracking-futuristic">
+              See It In Action
+            </h2>
+          </ScrollReveal>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {[gallery1, gallery2].map((img, i) => (
+              <ScrollReveal key={i} delay={0.15 * i}>
                 <motion.div
-                  className="bg-card border border-border rounded-card p-8 h-full relative overflow-hidden group hover:border-primary/30 transition-all duration-500"
-                  whileHover={{ y: -4 }}
+                  className="relative rounded-[12px] overflow-hidden h-[420px] group cursor-pointer"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.8, delay: 0.15 * i }}
+                  viewport={{ once: true }}
                 >
-                  <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-primary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <span className="font-heading text-[48px] font-bold text-primary/10 absolute top-4 right-4">
-                    {step.number}
-                  </span>
-                  <span className="font-heading text-[12px] tracking-[4px] text-primary/60 uppercase mb-4 block">
-                    Step {step.number}
-                  </span>
-                  <h3 className="font-sub text-[20px] text-foreground font-medium mb-3">
-                    {step.title}
-                  </h3>
-                  <p className="font-body text-[15px] text-titanium leading-[1.7]">
-                    {step.description}
-                  </p>
+                  <img src={img} alt={`Ground Port concept video ${i + 1}`} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <div className="absolute inset-0 bg-background/40 group-hover:bg-background/30 transition-colors" />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-16 h-16 rounded-full bg-primary/20 backdrop-blur-sm flex items-center justify-center border border-primary/30 group-hover:scale-110 transition-transform">
+                      <Play className="w-6 h-6 text-primary ml-1" />
+                    </div>
+                  </div>
+                  <div className="absolute bottom-4 left-4">
+                    <p className="font-body text-[13px] text-foreground/70">{i === 0 ? "Passenger Terminal Walkthrough" : "eVTOL Charging Operations"}</p>
+                  </div>
                 </motion.div>
               </ScrollReveal>
             ))}
@@ -172,22 +236,12 @@ const GroundPort = () => {
       <section className="section-padding">
         <div className="container-airavath">
           <ScrollReveal className="text-center mb-[60px]">
-            <h2 className="font-heading text-[32px] md:text-[40px] font-semibold text-foreground tracking-futuristic mb-4">
-              Technical Specifications
-            </h2>
+            <h2 className="font-heading text-[32px] md:text-[40px] font-semibold text-foreground tracking-futuristic mb-4">Technical Specifications</h2>
           </ScrollReveal>
-
           <ScrollReveal delay={0.1}>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-[900px] mx-auto">
               {specs.map((spec, i) => (
-                <motion.div
-                  key={spec.label}
-                  className="bg-card border border-border rounded-card p-6 text-center"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 * i }}
-                  viewport={{ once: true }}
-                >
+                <motion.div key={spec.label} className="bg-card border border-border rounded-[12px] p-6 text-center" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 * i, duration: 0.6 }} viewport={{ once: true }}>
                   <p className="font-heading text-[12px] tracking-[3px] text-primary/60 uppercase mb-2">{spec.label}</p>
                   <p className="font-heading text-[22px] font-semibold text-foreground">{spec.value}</p>
                 </motion.div>
@@ -197,22 +251,51 @@ const GroundPort = () => {
         </div>
       </section>
 
+      {/* Benefits Section */}
+      <section className="section-padding" style={{ background: "linear-gradient(180deg, hsl(0 0% 0%) 0%, hsl(0 0% 2%) 100%)" }}>
+        <div className="container-airavath">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <ScrollReveal>
+              <span className="font-heading text-[12px] tracking-[4px] text-primary uppercase mb-4 block">Key Benefits</span>
+              <h2 className="font-heading text-[32px] md:text-[40px] font-semibold text-foreground tracking-futuristic mb-8">
+                Why Ground Ports Matter
+              </h2>
+              <div className="space-y-4">
+                {benefits.map((benefit, i) => (
+                  <motion.div
+                    key={i}
+                    className="flex items-start gap-3"
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.1 * i, duration: 0.6 }}
+                    viewport={{ once: true }}
+                  >
+                    <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                    <p className="font-body text-[16px] text-titanium leading-[1.6]">{benefit}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </ScrollReveal>
+            <ScrollReveal delay={0.2}>
+              <div className="relative rounded-[12px] overflow-hidden">
+                <img src={hubGroundport} alt="Ground Port benefits" className="w-full h-[400px] object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/50 to-transparent" />
+              </div>
+            </ScrollReveal>
+          </div>
+        </div>
+      </section>
+
       {/* Features Grid */}
-      <section className="section-padding" style={{ background: "linear-gradient(180deg, hsl(0 0% 2%) 0%, hsl(0 0% 0%) 100%)" }}>
+      <section className="section-padding">
         <div className="container-airavath">
           <ScrollReveal className="text-center mb-[80px]">
-            <h2 className="font-heading text-[32px] md:text-[40px] font-semibold text-foreground tracking-futuristic mb-4">
-              Key Capabilities
-            </h2>
+            <h2 className="font-heading text-[32px] md:text-[40px] font-semibold text-foreground tracking-futuristic mb-4">Key Capabilities</h2>
           </ScrollReveal>
-
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             {features.map((f, i) => (
               <ScrollReveal key={f.title} delay={0.12 * i}>
-                <motion.div
-                  className="group bg-card border border-border rounded-card p-8 h-full hover:border-primary/30 hover:shadow-[0_0_30px_hsl(189_100%_50%/0.1)] transition-all duration-500"
-                  whileHover={{ y: -4 }}
-                >
+                <motion.div className="group bg-card border border-border rounded-[12px] p-8 h-full hover:border-primary/30 hover:shadow-[0_0_30px_hsl(189_100%_50%/0.1)] transition-all duration-500" whileHover={{ y: -4 }}>
                   <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-colors">
                     <f.icon className="w-6 h-6 text-primary" />
                   </div>
@@ -226,25 +309,15 @@ const GroundPort = () => {
       </section>
 
       {/* CTA */}
-      <section className="section-padding">
+      <section className="section-padding" style={{ background: "linear-gradient(180deg, hsl(0 0% 2%) 0%, hsl(0 0% 0%) 100%)" }}>
         <div className="container-airavath text-center">
           <ScrollReveal>
-            <h2 className="font-heading text-[28px] md:text-[36px] font-semibold text-foreground tracking-futuristic mb-6">
-              Explore the Full Hub Network
-            </h2>
-            <p className="font-body text-body-lg text-titanium max-w-[540px] mx-auto mb-8 leading-[1.6]">
-              Ground Ports work in concert with Vertiports, Sky Ports, and the Hub Network to deliver seamless city-wide aerial mobility.
-            </p>
+            <h2 className="font-heading text-[28px] md:text-[36px] font-semibold text-foreground tracking-futuristic mb-6">Explore the Full Hub Network</h2>
+            <p className="font-body text-body-lg text-titanium max-w-[540px] mx-auto mb-8 leading-[1.6]">Ground Ports work in concert with Vertiports, Sky Ports, and the Hub Network.</p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Link to="/vertiport" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-card border border-border text-foreground font-body hover:border-primary/30 transition-all">
-                Vertiport <ChevronRight size={16} />
-              </Link>
-              <Link to="/sky-port" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-card border border-border text-foreground font-body hover:border-primary/30 transition-all">
-                Sky Port <ChevronRight size={16} />
-              </Link>
-              <Link to="/hub-network" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-card border border-border text-foreground font-body hover:border-primary/30 transition-all">
-                Hub Network <ChevronRight size={16} />
-              </Link>
+              <Link to="/vertiport" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-card border border-border text-foreground font-body hover:border-primary/30 transition-all">Vertiport <ChevronRight size={16} /></Link>
+              <Link to="/sky-port" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-card border border-border text-foreground font-body hover:border-primary/30 transition-all">Sky Port <ChevronRight size={16} /></Link>
+              <Link to="/hub-network" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-card border border-border text-foreground font-body hover:border-primary/30 transition-all">Hub Network <ChevronRight size={16} /></Link>
             </div>
           </ScrollReveal>
         </div>
